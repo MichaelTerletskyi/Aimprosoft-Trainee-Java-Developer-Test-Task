@@ -33,4 +33,4 @@ VALUES ('Carl', 'Johnson', 'cj@gmail.com', 250000, '1968-05-03', 1, 1),
        ('Lance', 'Wilson', 'ryder@yahoo.com', 50, '1963-06-24', 0, 1),
 
        ('Frank', 'Tenpenny', 'officertenpenny@gmail.com', 80.0, '1958-11-12', 1, 2),
-       ('Edward', 'Pulaski', 'officerpulaski@gmail.com', 80.0, '1956-02-27', 0, 2)
+       ('Edward', 'Pulaski', 'officerpulaski@gmail.com', 80.0, '1956-02-27', 0, 2);
