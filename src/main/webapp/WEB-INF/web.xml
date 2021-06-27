@@ -2,6 +2,9 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
+<!--Файл web. xml является стандартным дескриптором веб-приложения Java, и должен быть создан для блоков Middleware, Web Client и Web Portal. -->
+<!--В проекте приложения файлы web. xml располагаются в каталогах web/WEB-INF соответствующих модулей-->
+
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 </web-app>
