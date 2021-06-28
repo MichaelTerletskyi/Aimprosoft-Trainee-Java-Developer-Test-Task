@@ -48,6 +48,7 @@ public abstract class AbstractJDBCRepository<T, K> {
     protected abstract String getAllQuery();
     protected abstract String updateQuery();
     protected abstract String deleteQuery();
+    protected abstract String existByIdQuery();
 
     protected abstract void preparedStatementExtract(PreparedStatement preparedStatement, T element) throws SQLException;
     protected abstract void preparedStatementExtractUpdate(PreparedStatement preparedStatement, T element) throws SQLException;
@@ -109,5 +110,19 @@ public abstract class AbstractJDBCRepository<T, K> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean existById(K id) {
+        boolean exist = false;
+        try(PreparedStatement preparedStatement = connection.prepareStatement(existByIdQuery())) {
+            preparedStatement.setLong(1, (Long) id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                exist =  rs.getInt(1) > 0;
+            }
+        } catch (SQLException e){
+             e.printStackTrace();;
+        }
+        return exist;
     }
 }

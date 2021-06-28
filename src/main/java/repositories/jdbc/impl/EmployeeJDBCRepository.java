@@ -1,11 +1,13 @@
 package repositories.jdbc.impl;
 
+import exceptions.EntityNotFoundException;
 import models.Employee;
 import repositories.IEmployee;
 import repositories.jdbc.AbstractJDBCRepository;
 
 import java.sql.*;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -41,6 +43,11 @@ public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Lon
     @Override
     protected String deleteQuery() {
         return "DELETE FROM test_database.employees WHERE employee_id = ?";
+    }
+
+    @Override
+    protected String existByIdQuery() {
+        return "SELECT COUNT(*) FROM test_database.employees WHERE employee_id = ?";
     }
 
     @Override
@@ -95,5 +102,49 @@ public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Lon
             e.printStackTrace();
         }
         return employees;
+    }
+
+    @Override
+    public Employee getByEmail(String email) {
+        Employee employee = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT employee_id, first_name, last_name, email, salary_per_hour, date_of_birth, head FROM test_database.employees WHERE email = ?")) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                employee = resultSetExtract(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(employee).orElseThrow(() -> new EntityNotFoundException("Employee with this email has not been found"));
+    }
+
+    @Override
+    public boolean existByEmail(String email) {
+        boolean isEmailExist = false;
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM test_database.employees WHERE email = ?")) {
+            preparedStatement.setString(1, email);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                isEmailExist = rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isEmailExist;
+    }
+
+    @Override
+    public Long getIdByEmail(String email) {
+        Long employeeId = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT employee_id FROM test_database.employees WHERE email = ?")) {
+            preparedStatement.setString(1, email);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) employeeId = rs.getLong("employee_id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(employeeId).orElseThrow(()
+                -> new EntityNotFoundException(String.format("%s %s %s", "Employee with email '", email, "' has not been found ")));
     }
 }

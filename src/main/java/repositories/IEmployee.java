@@ -10,4 +10,10 @@ import java.util.Set;
 
 public interface IEmployee {
     Set<Employee> getAllByDepartmentId(Long id);
+
+    Employee getByEmail(String email);
+
+    boolean existByEmail(String email);
+
+    Long getIdByEmail(String email);
 }
