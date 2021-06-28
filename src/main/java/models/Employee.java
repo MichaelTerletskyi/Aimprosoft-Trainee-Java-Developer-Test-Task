@@ -4,6 +4,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 import static validation.IEmployeeValidationMessages.*;
@@ -177,6 +178,10 @@ public class Employee implements Serializable {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Integer getAge(){
+        return (int) ChronoUnit.YEARS.between(getDateOfBirth(), LocalDate.now());
     }
 
     @Override

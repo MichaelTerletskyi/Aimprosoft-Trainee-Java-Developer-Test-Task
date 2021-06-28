@@ -7,11 +7,11 @@ import models.Department;
  */
 
 public interface IDepartment {
-    Department getById(Long id, boolean includeEmployees);
+    Department getById(Long id, boolean fetchEmployees);
 
     Department getByTitle(String title);
 
-    Department getByTitle(String title, boolean includeEmployees);
+    Department getByTitle(String title, boolean fetchEmployees);
 
     boolean existByTitle(String title);
 

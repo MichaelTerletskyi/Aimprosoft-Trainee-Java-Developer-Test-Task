@@ -84,10 +84,10 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
 
     private EmployeeJDBCRepository employeeJDBCRepository = new EmployeeJDBCRepository();
 
-    // Этот overload метод возвращает Department с Employees в случае, если includeEmployees равно true
+    // Этот overload метод возвращает Department с Employees в случае, если fetchEmployees равно true
     @Override
-    public Department getById(Long id, boolean includeEmployees) {
-        if (!includeEmployees) return super.getById(id);
+    public Department getById(Long id, boolean fetchEmployees) {
+        if (!fetchEmployees) return super.getById(id);
         Department department = super.getById(id);
         department.setEmployees(employeeJDBCRepository.getAllByDepartmentId(id));
         return department;
@@ -109,10 +109,10 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
     }
 
     @Override
-    public Department getByTitle(String title, boolean includeEmployees) {
+    public Department getByTitle(String title, boolean fetchEmployees) {
         Department department = getByTitle(title);
         if (!Objects.isNull(department)) {
-            if (includeEmployees) {
+            if (fetchEmployees) {
                 Long id = getIdByTitle(department.getTitle());
                 department.setEmployees(employeeJDBCRepository.getAllByDepartmentId(id));
             }
@@ -154,47 +154,29 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
      * Independent block
      */
 
-    public void addEmployee(Department department, Employee employee) {
+    private void addEmployee(long departmentId, long employeeId) {
         try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_database.employees SET department_id = ? WHERE employee_id = ?")) {
-            preparedStatement.setLong(1, department.getId());
-            preparedStatement.setLong(2, employee.getId());
+            preparedStatement.setLong(1, departmentId);
+            preparedStatement.setLong(2, employeeId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addEmployee(Department department, Employee employee) {
+        addEmployee(department.getId(), employee.getId());
     }
 
     public void addEmployee(Long departmentId, Employee employee) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_database.employees SET department_id = ? WHERE employee_id = ?")) {
-            preparedStatement.setLong(1, departmentId);
-            preparedStatement.setLong(2, employee.getId());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        addEmployee(departmentId, employee.getId());
     }
 
     public void addEmployee(Department department, Set<Employee> employees) {
-        employees.forEach(employee -> {
-            try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_database.employees SET department_id = ? WHERE employee_id = ?")) {
-                preparedStatement.setLong(1, department.getId());
-                preparedStatement.setLong(2, employee.getId());
-                preparedStatement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+        employees.forEach(employee -> addEmployee(department.getId(), employee.getId()));
     }
 
     public void addEmployee(Long departmentId, Set<Employee> employees) {
-        employees.forEach(employee -> {
-            try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_database.employees SET department_id = ? WHERE employee_id = ?")) {
-                preparedStatement.setLong(1, departmentId);
-                preparedStatement.setLong(2, employee.getId());
-                preparedStatement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+        employees.forEach(employee -> addEmployee(departmentId, employee.getId()));
     }
 }

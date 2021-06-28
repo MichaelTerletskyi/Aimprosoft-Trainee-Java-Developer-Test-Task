@@ -1,5 +1,8 @@
 package models;
 
+import exceptions.FetchFailedException;
+import exceptions.HeadOfDepartmentNotFoundException;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -71,6 +74,18 @@ public class Department implements Serializable {
 
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
+    }
+
+    public Employee getHead() {
+        if (Objects.isNull(getEmployees())) {
+            throw new FetchFailedException("Employees fetch has been failed, try to repeat attempt with fetchEmployees = true");
+        }
+        return getEmployees().stream().filter(Employee::isHead).findFirst().orElseThrow(()
+                -> new HeadOfDepartmentNotFoundException("This department doesn't have Head"));
+    }
+
+    public String getFullNameOfHead(){
+        return String.format("%s %s", getHead().getFirstName(), getHead().getLastName());
     }
 
     @Override

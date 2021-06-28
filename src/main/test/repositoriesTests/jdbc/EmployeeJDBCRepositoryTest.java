@@ -62,7 +62,7 @@ class EmployeeJDBCRepositoryTest {
     }
 
     @Test
-    void departmentIncludeEmployee() {
+    void departmentFetchEmployee() {
         Assertions.assertFalse(departmentJDBCRepository.existByTitle("Fetched Department"));
         departmentJDBCRepository.create(new Department("Fetched Department"));
         Assertions.assertTrue(departmentJDBCRepository.existByTitle("Fetched Department"));
