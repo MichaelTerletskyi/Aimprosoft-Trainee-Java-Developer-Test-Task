@@ -82,40 +82,6 @@ public class Employee implements Serializable {
         this.isHead = isHead;
     }
 
-    // Additional constructor with ID for JDBC implementation
-    public Employee(Long id,
-
-                    @NotNull(message = EMPLOYEE_FIRST_NAME_NULL_ERROR_MESSAGE)
-                    @NotEmpty(message = EMPLOYEE_FIRST_NAME_EMPTY_ERROR_MESSAGE)
-                    @Size(min = 1, max = 32, message = EMPLOYEE_FIRST_NAME_SIZE_ERROR_MESSAGE)
-                    @Pattern(regexp = "[a-zA-Zа-яА-Я ]*", message = EMPLOYEE_FIRST_NAME_PATTERN_ERROR_MESSAGE) String firstName,
-
-                    @NotNull(message = EMPLOYEE_LAST_NAME_NULL_ERROR_MESSAGE)
-                    @NotEmpty(message = EMPLOYEE_LAST_NAME_EMPTY_ERROR_MESSAGE)
-                    @Size(min = 1, max = 32, message = EMPLOYEE_LAST_NAME_SIZE_ERROR_MESSAGE)
-                    @Pattern(regexp = "[a-zA-Zа-яА-Я ]*", message = EMPLOYEE_LAST_NAME_PATTERN_ERROR_MESSAGE) String lastName,
-
-                    @NotNull(message = EMPLOYEE_EMAIL_NULL_ERROR_MESSAGE)
-                    @NotEmpty(message = EMPLOYEE_EMAIL_EMPTY_ERROR_MESSAGE)
-                    @Email(message = EMPLOYEE_EMAIL_EMAIL_ERROR_MESSAGE) String email,
-
-                    @NotNull(message = EMPLOYEE_SALARY_PER_HOUR_NULL_ERROR_MESSAGE)
-                    @DecimalMin(value = "1", message = EMPLOYEE_SALARY_PER_HOUR_DECIMAL_MIN_ERROR_MESSAGE)
-                    @DecimalMax(value = "99999", message = EMPLOYEE_SALARY_PER_HOUR_DECIMAL_MAX_ERROR_MESSAGE) BigDecimal salaryPerHour,
-
-                    @NotNull(message = EMPLOYEE_DATE_OF_BIRTH_NOT_NULL_ERROR_MESSAGE)
-                    @Past(message = EMPLOYEE_DATE_OF_BIRTH_PAST_ERROR_MESSAGE) LocalDate dateOfBirth,
-
-                    boolean isHead) {
-        this.id = id;
-        this.firstName = firstName.strip();
-        this.lastName = lastName.strip();
-        this.email = email.strip();
-        this.salaryPerHour = salaryPerHour;
-        this.dateOfBirth = dateOfBirth;
-        this.isHead = isHead;
-    }
-
     public Long getId() {
         return id;
     }

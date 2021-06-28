@@ -42,16 +42,6 @@ public class Department implements Serializable {
         this.title = title.strip();
     }
 
-    // Additional constructor with ID for JDBC implementation
-    public Department(Long id,
-                      @NotNull(message = DEPARTMENT_TITLE_NULL_ERROR_MESSAGE)
-                      @NotEmpty(message = DEPARTMENT_TITLE_EMPTY_ERROR_MESSAGE)
-                      @Size(min = 1, max = 64, message = DEPARTMENT_TITLE_SIZE_ERROR_MESSAGE)
-                      @Pattern(regexp = "[a-zA-Zа-яА-Я ]*", message = DEPARTMENT_TITLE_PATTERN_ERROR_MESSAGE) String title) {
-        this.id = id;
-        this.title = title;
-    }
-
     public Long getId() {
         return id;
     }
