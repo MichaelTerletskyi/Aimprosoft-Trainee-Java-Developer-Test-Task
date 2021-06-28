@@ -41,7 +41,7 @@ public abstract class AbstractJDBCRepository<T, K> {
      * Так же закрытие произойдет при повторном выполнении запроса или возврату результата из другого набора результатов.
      */
 
-    private Connection connection = JDBCUtil.getConnection();
+    protected Connection connection = JDBCUtil.getConnection();
 
     protected abstract String createQuery();
     protected abstract String getByIdQuery();

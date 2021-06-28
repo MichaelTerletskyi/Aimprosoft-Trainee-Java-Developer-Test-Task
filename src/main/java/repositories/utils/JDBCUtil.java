@@ -12,7 +12,7 @@ public class JDBCUtil {
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/test_database";
 
-    // Pay attention at USERNAME and PASSWORD you you need to set your values here
+    // Обрати внимание на USERNAME И PASSWORD , они могут отличатся
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "root";
 

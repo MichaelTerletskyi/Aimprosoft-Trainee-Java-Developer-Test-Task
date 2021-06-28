@@ -1,6 +1,7 @@
 package repositories.jdbc.impl;
 
 import models.Department;
+import repositories.IDepartment;
 import repositories.jdbc.AbstractJDBCRepository;
 
 import java.sql.PreparedStatement;
@@ -11,7 +12,11 @@ import java.sql.SQLException;
  * @Create 6/27/2021
  */
 
-public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department, Long> {
+public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department, Long> implements IDepartment {
+
+    /**
+     * {@link AbstractJDBCRepository} block
+     */
 
     @Override
     protected String createQuery() {
@@ -60,5 +65,20 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
     @Override
     protected String optionalMessage() {
         return "Department not found";
+    }
+
+
+    /**
+     * {@link IDepartment} block
+     */
+
+    private EmployeeJDBCRepository employeeJDBCRepository = new EmployeeJDBCRepository();
+
+    // Этот overload метод возвращает Department с Employees в случае, если includeEmployees равно true
+    public Department getById(Long id, boolean includeEmployees) {
+        if (!includeEmployees) return super.getById(id);
+        Department department = super.getById(id);
+        department.setEmployees(employeeJDBCRepository.getAllByDepartmentId(id));
+        return department;
     }
 }

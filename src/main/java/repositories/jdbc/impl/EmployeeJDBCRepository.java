@@ -1,18 +1,22 @@
 package repositories.jdbc.impl;
 
 import models.Employee;
+import repositories.IEmployee;
 import repositories.jdbc.AbstractJDBCRepository;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @Create 6/27/2021
  */
 
-public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Long> {
+public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Long> implements IEmployee {
+
+    /**
+     * {@link AbstractJDBCRepository} block
+     */
 
     @Override
     protected String createQuery() {
@@ -71,5 +75,25 @@ public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Lon
     @Override
     protected String optionalMessage() {
         return "Employee not found";
+    }
+
+
+    /**
+     * {@link IEmployee} block
+     */
+
+    @Override
+    public Set<Employee> getAllByDepartmentId(Long id) {
+        Set<Employee> employees = new HashSet<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM test_database.employees WHERE department_id = ?")) {
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                employees.add(resultSetExtract(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employees;
     }
 }
