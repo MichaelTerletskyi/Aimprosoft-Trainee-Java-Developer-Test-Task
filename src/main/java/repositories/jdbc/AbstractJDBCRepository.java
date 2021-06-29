@@ -114,14 +114,12 @@ public abstract class AbstractJDBCRepository<T, K> {
 
     public boolean existById(K id) {
         boolean exist = false;
-        try(PreparedStatement preparedStatement = connection.prepareStatement(existByIdQuery())) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(existByIdQuery())) {
             preparedStatement.setLong(1, (Long) id);
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                exist =  rs.getInt(1) > 0;
-            }
-        } catch (SQLException e){
-             e.printStackTrace();;
+            if (rs.next()) exist = rs.getInt(1) > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return exist;
     }

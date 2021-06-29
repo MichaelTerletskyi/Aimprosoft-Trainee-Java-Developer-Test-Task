@@ -2,7 +2,6 @@ package repositories.jdbc.impl;
 
 import exceptions.EntityNotFoundException;
 import models.Department;
-import models.Employee;
 import repositories.IDepartment;
 import repositories.jdbc.AbstractJDBCRepository;
 
@@ -11,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * @Create 6/27/2021
@@ -154,7 +152,7 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
      * Independent block
      */
 
-    private void addEmployee(long departmentId, long employeeId) {
+    public void addEmployee(long departmentId, long employeeId) {
         try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_database.employees SET department_id = ? WHERE employee_id = ?")) {
             preparedStatement.setLong(1, departmentId);
             preparedStatement.setLong(2, employeeId);
@@ -162,21 +160,5 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public void addEmployee(Department department, Employee employee) {
-        addEmployee(department.getId(), employee.getId());
-    }
-
-    public void addEmployee(Long departmentId, Employee employee) {
-        addEmployee(departmentId, employee.getId());
-    }
-
-    public void addEmployee(Department department, Set<Employee> employees) {
-        employees.forEach(employee -> addEmployee(department.getId(), employee.getId()));
-    }
-
-    public void addEmployee(Long departmentId, Set<Employee> employees) {
-        employees.forEach(employee -> addEmployee(departmentId, employee.getId()));
     }
 }

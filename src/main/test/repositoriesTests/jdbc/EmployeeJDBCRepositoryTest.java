@@ -9,7 +9,6 @@ import repositories.jdbc.impl.EmployeeJDBCRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Set;
 
 /**
  * @Create 6/28/2021
@@ -67,7 +66,6 @@ class EmployeeJDBCRepositoryTest {
         departmentJDBCRepository.create(new Department("Fetched Department"));
         Assertions.assertTrue(departmentJDBCRepository.existByTitle("Fetched Department"));
 
-
         Assertions.assertFalse(employeeJDBCRepository.existByEmail("michaeldesanta@gmail.com"));
         Assertions.assertFalse(employeeJDBCRepository.existByEmail("trevor@gmail.com"));
 
@@ -83,11 +81,12 @@ class EmployeeJDBCRepositoryTest {
         Department departmentBeforeAdding = departmentJDBCRepository.getByTitle("Fetched Department");
         Assertions.assertNull(departmentBeforeAdding.getEmployees());
 
-
         Employee michaelDeSanta = employeeJDBCRepository.getByEmail("michaeldesanta@gmail.com");
         Employee trevorPhilips = employeeJDBCRepository.getByEmail("trevor@gmail.com");
-        departmentJDBCRepository.addEmployee(departmentBeforeAdding, Set.of(michaelDeSanta, trevorPhilips));
 
+
+        departmentJDBCRepository.addEmployee(departmentBeforeAdding.getId(), michaelDeSanta.getId());
+        departmentJDBCRepository.addEmployee(departmentBeforeAdding.getId(), trevorPhilips.getId());
 
         Department departmentWithoutIncludeEmployees = departmentJDBCRepository.getByTitle("Fetched Department");
         Assertions.assertNull(departmentWithoutIncludeEmployees.getEmployees());
