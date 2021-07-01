@@ -14,7 +14,7 @@ import java.util.Set;
 public class EmployeeService extends AbstractService<Employee> implements IEmployee {
 
     @Override
-    protected EmployeeJDBCRepository repository() {
+    protected EmployeeJDBCRepository jdbcRepository() {
         return new EmployeeJDBCRepository();
     }
 
@@ -24,21 +24,21 @@ public class EmployeeService extends AbstractService<Employee> implements IEmplo
 
     @Override
     public Set<Employee> getAllByDepartmentId(Long id) {
-        return repository().getAllByDepartmentId(id);
+        return jdbcRepository().getAllByDepartmentId(id);
     }
 
     @Override
     public Employee getByEmail(String email) {
-        return repository().getByEmail(email);
+        return jdbcRepository().getByEmail(email);
     }
 
     @Override
     public boolean existByEmail(String email) {
-        return repository().existByEmail(email);
+        return jdbcRepository().existByEmail(email);
     }
 
     @Override
     public Long getIdByEmail(String email) {
-        return repository().getIdByEmail(email);
+        return jdbcRepository().getIdByEmail(email);
     }
 }

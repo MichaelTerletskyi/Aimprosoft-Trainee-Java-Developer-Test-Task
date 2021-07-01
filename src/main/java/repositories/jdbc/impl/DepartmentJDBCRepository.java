@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @Create 6/27/2021
@@ -67,6 +68,7 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
         Department department = new Department();
         department.setId(resultSet.getLong("department_id"));
         department.setTitle(resultSet.getString("title"));
+        department.setDescription(resultSet.getString("description"));
         return department;
     }
 
@@ -92,9 +94,17 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
     }
 
     @Override
+    public Set<Department> getAll(boolean fetchEmployees) {
+        if (!fetchEmployees) return super.getAll();
+        Set<Department> all = super.getAll();
+        all.forEach(department -> department.setEmployees(employeeJDBCRepository.getAllByDepartmentId(department.getId())));
+        return all;
+    }
+
+    @Override
     public Department getByTitle(String title) {
         Department department = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT department_id, title FROM test_database.departments WHERE title = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT department_id, title, description FROM test_database.departments WHERE title = ?")) {
             preparedStatement.setString(1, title);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

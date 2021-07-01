@@ -15,7 +15,7 @@ import java.util.Set;
 public class DepartmentService extends AbstractService<Department> implements IDepartment {
 
     @Override
-    protected DepartmentJDBCRepository repository() {
+    protected DepartmentJDBCRepository jdbcRepository() {
         return new DepartmentJDBCRepository();
     }
 
@@ -25,27 +25,32 @@ public class DepartmentService extends AbstractService<Department> implements ID
 
     @Override
     public Department getById(Long id, boolean fetchEmployees) {
-        return repository().getById(id, fetchEmployees);
+        return jdbcRepository().getById(id, fetchEmployees);
+    }
+
+    @Override
+    public Set<Department> getAll(boolean fetchEmployees) {
+        return jdbcRepository().getAll(fetchEmployees);
     }
 
     @Override
     public Department getByTitle(String title) {
-        return repository().getByTitle(title);
+        return jdbcRepository().getByTitle(title);
     }
 
     @Override
     public Department getByTitle(String title, boolean fetchEmployees) {
-        return repository().getByTitle(title, fetchEmployees);
+        return jdbcRepository().getByTitle(title, fetchEmployees);
     }
 
     @Override
     public boolean existByTitle(String title) {
-        return repository().existByTitle(title);
+        return jdbcRepository().existByTitle(title);
     }
 
     @Override
     public Long getIdByTitle(String title) {
-        return repository().getIdByTitle(title);
+        return jdbcRepository().getIdByTitle(title);
     }
 
     /**
@@ -53,26 +58,26 @@ public class DepartmentService extends AbstractService<Department> implements ID
      */
 
     public void addEmployee(Department department, Employee employee) {
-        repository().addEmployee(department.getId(), employee.getId());
+        jdbcRepository().addEmployee(department.getId(), employee.getId());
     }
 
     public void addEmployee(Department department, Long employeeId) {
-        repository().addEmployee(department.getId(), employeeId);
+        jdbcRepository().addEmployee(department.getId(), employeeId);
     }
 
     public void addEmployee(Long departmentId, Employee employee) {
-        repository().addEmployee(departmentId, employee.getId());
+        jdbcRepository().addEmployee(departmentId, employee.getId());
     }
 
     public void addEmployee(Long departmentId, Long employeeId) {
-        repository().addEmployee(departmentId, employeeId);
+        jdbcRepository().addEmployee(departmentId, employeeId);
     }
 
     public void addEmployee(Department department, Set<Employee> employees) {
-        employees.forEach(employee -> repository().addEmployee(department.getId(), employee.getId()));
+        employees.forEach(employee -> jdbcRepository().addEmployee(department.getId(), employee.getId()));
     }
 
     public void addEmployee(Long departmentId, Set<Employee> employees) {
-        employees.forEach(employee -> repository().addEmployee(departmentId, employee.getId()));
+        employees.forEach(employee -> jdbcRepository().addEmployee(departmentId, employee.getId()));
     }
 }

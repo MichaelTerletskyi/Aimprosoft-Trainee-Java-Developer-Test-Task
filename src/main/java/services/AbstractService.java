@@ -9,29 +9,29 @@ import java.util.Set;
  */
 
 public abstract class AbstractService<T> {
-    protected abstract AbstractJDBCRepository<T, Long> repository();
+    protected abstract AbstractJDBCRepository<T, Long> jdbcRepository();
 
     public void create(T element) {
-        repository().create(element);
+        jdbcRepository().create(element);
     }
 
     public T getById(Long id) {
-        return repository().getById(id);
+        return jdbcRepository().getById(id);
     }
 
     public Set<T> getAll() {
-        return repository().getAll();
+        return jdbcRepository().getAll();
     }
 
     public T update(T element) {
-        return repository().update(element);
+        return jdbcRepository().update(element);
     }
 
     public void delete(Long id) {
-        repository().delete(id);
+        jdbcRepository().delete(id);
     }
 
     public boolean existById(Long id) {
-        return repository().existById(id);
+        return jdbcRepository().existById(id);
     }
 }

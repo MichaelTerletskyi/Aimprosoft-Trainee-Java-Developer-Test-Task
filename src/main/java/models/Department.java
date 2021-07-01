@@ -29,6 +29,9 @@ public class Department implements Serializable {
     @Pattern(regexp = "[a-zA-Zа-яА-Я ]*", message = DEPARTMENT_TITLE_PATTERN_ERROR_MESSAGE)
     private String title;
 
+    @Size(max = 255, message = DEPARTMENT_DESCRIPTION_SIZE_ERROR_MESSAGE)
+    private String description;
+
     private Set<Employee> employees;
 
     public Department() {
@@ -40,6 +43,15 @@ public class Department implements Serializable {
                       @Size(min = 1, max = 64, message = DEPARTMENT_TITLE_SIZE_ERROR_MESSAGE)
                       @Pattern(regexp = "[a-zA-Zа-яА-Я ]*", message = DEPARTMENT_TITLE_PATTERN_ERROR_MESSAGE) String title) {
         this.title = title.strip();
+    }
+
+    public Department(@NotNull(message = DEPARTMENT_TITLE_NULL_ERROR_MESSAGE)
+                      @NotEmpty(message = DEPARTMENT_TITLE_EMPTY_ERROR_MESSAGE)
+                      @Size(min = 1, max = 64, message = DEPARTMENT_TITLE_SIZE_ERROR_MESSAGE)
+                      @Pattern(regexp = "[a-zA-Zа-яА-Я ]*", message = DEPARTMENT_TITLE_PATTERN_ERROR_MESSAGE) String title,
+                      @Size(max = 255, message = DEPARTMENT_DESCRIPTION_SIZE_ERROR_MESSAGE) String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public Long getId() {
@@ -58,6 +70,14 @@ public class Department implements Serializable {
         this.title = title.strip();
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Set<Employee> getEmployees() {
         return employees;
     }
@@ -74,8 +94,13 @@ public class Department implements Serializable {
                 -> new HeadOfDepartmentNotFoundException("This department doesn't have Head"));
     }
 
-    public String getFullNameOfHead(){
-        return String.format("%s %s", getHead().getFirstName(), getHead().getLastName());
+    public String getFullNameOfHead() {
+        try {
+            if (!Objects.isNull(getHead())) return String.format("%s %s", getHead().getFirstName(), getHead().getLastName());
+        } catch (HeadOfDepartmentNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "No Head";
     }
 
     @Override
@@ -84,12 +109,13 @@ public class Department implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(title, that.title);
+                Objects.equals(title, that.title) &&
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title);
+        return Objects.hash(id, title, description);
     }
 
     @Override
@@ -97,6 +123,7 @@ public class Department implements Serializable {
         return "Department{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

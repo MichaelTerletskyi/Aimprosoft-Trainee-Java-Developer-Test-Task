@@ -1,10 +1,51 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <!--Файл web. xml является стандартным дескриптором веб-приложения Java, и должен быть создан для блоков Middleware, Web Client и Web Portal. -->
 <!--В проекте приложения файлы web. xml располагаются в каталогах web/WEB-INF соответствующих модулей-->
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>Archetype Created Web Application</display-name>
+
+
+
+    <!-- Index block -->
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>controllers.IndexController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+
+    <!-- Department block -->
+    <servlet>
+        <servlet-name>Departments</servlet-name>
+        <servlet-class>controllers.department.DepartmentsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Departments</servlet-name>
+        <url-pattern>/departments</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+
+
+  <!-- Employee block -->
+
+
+
+
+
 </web-app>

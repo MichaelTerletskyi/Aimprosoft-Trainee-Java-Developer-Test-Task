@@ -6,7 +6,8 @@ USE test_database;
 CREATE TABLE IF NOT EXISTS DEPARTMENTS
 (
     department_id BIGINT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title         VARCHAR(64) NOT NULL UNIQUE
+    title         VARCHAR(64) NOT NULL UNIQUE,
+    description   VARCHAR(255)
 );
 
 USE test_database;
@@ -22,9 +23,11 @@ CREATE TABLE IF NOT EXISTS EMPLOYEES
     department_id   BIGINT       NULL REFERENCES DEPARTMENTS (department_id)
 );
 
-INSERT INTO DEPARTMENTS(title)
-VALUES ('Groove Street Department'),
-       ('Los Santos Police Department');
+INSERT INTO DEPARTMENTS(title, description)
+VALUES ('Grove Street Families',
+        'he Grove Street Families is an African-American street gang and one of the oldest street gangs in Los Santos, San Andreas. '),
+       ('Los Santos Police Department',
+        'The Los Santos Police Department (LSPD) is the primary law enforcement agency of the city of Los Santos, San Andreas');
 
 INSERT INTO EMPLOYEES(first_name, last_name, email, salary_per_hour, date_of_birth, head, department_id)
 VALUES ('Carl', 'Johnson', 'cj@gmail.com', 250000, '1968-05-03', 1, 1),
