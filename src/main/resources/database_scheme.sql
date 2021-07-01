@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS EMPLOYEES
 
 INSERT INTO DEPARTMENTS(title, description)
 VALUES ('Grove Street Families',
-        'he Grove Street Families is an African-American street gang and one of the oldest street gangs in Los Santos, San Andreas. '),
+        'The Grove Street Families is an African-American street gang and one of the oldest street gangs in Los Santos, San Andreas. '),
        ('Los Santos Police Department',
         'The Los Santos Police Department (LSPD) is the primary law enforcement agency of the city of Los Santos, San Andreas');
 

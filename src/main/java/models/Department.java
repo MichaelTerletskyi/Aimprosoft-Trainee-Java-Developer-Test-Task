@@ -54,6 +54,17 @@ public class Department implements Serializable {
         this.description = description.strip();
     }
 
+    public Department(Long id,
+                      @NotNull(message = DEPARTMENT_TITLE_NULL_ERROR_MESSAGE)
+                      @NotEmpty(message = DEPARTMENT_TITLE_EMPTY_ERROR_MESSAGE)
+                      @Size(min = 1, max = 64, message = DEPARTMENT_TITLE_SIZE_ERROR_MESSAGE)
+                      @Pattern(regexp = "[a-zA-Zа-яА-Я ]*", message = DEPARTMENT_TITLE_PATTERN_ERROR_MESSAGE) String title,
+                      @Size(max = 255, message = DEPARTMENT_DESCRIPTION_SIZE_ERROR_MESSAGE) String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }
@@ -96,7 +107,8 @@ public class Department implements Serializable {
 
     public String getFullNameOfHead() {
         try {
-            if (!Objects.isNull(getHead())) return String.format("%s %s", getHead().getFirstName(), getHead().getLastName());
+            if (!Objects.isNull(getHead()))
+                return String.format("%s %s", getHead().getFirstName(), getHead().getLastName());
         } catch (HeadOfDepartmentNotFoundException e) {
             e.printStackTrace();
         }

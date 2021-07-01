@@ -1,10 +1,13 @@
 package validation.impl;
 
+import exceptions.EntityNotFoundException;
 import models.Department;
 import services.impl.DepartmentService;
 import validation.Validator;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.Objects;
 
 import static validation.IDepartmentValidationErrorsMessages.DEPARTMENT_TITLE_UNIQUE_ERROR_MESSAGE;
 
@@ -27,7 +30,16 @@ public class DepartmentValidator extends Validator<Department> {
 
     @Override
     protected boolean existByUniqueField(Department department) {
-        return service().existByTitle(department.getTitle());
+        Long idByTitle = null;
+        boolean existByTitle = service().existByTitle(department.getTitle());
+        try {
+            idByTitle = service().getIdByTitle(department.getTitle());
+        } catch (EntityNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (Objects.isNull(department.getId())) return existByTitle;
+        if (Objects.isNull(idByTitle)) return existByTitle;
+        return !idByTitle.equals(department.getId()) && existByTitle;
     }
 
     @Override
@@ -37,6 +49,8 @@ public class DepartmentValidator extends Validator<Department> {
 
     @Override
     protected Department getPrimalModel(HttpServletRequest req) {
-        return new Department(req.getParameter("title"), req.getParameter("description"));
+        return Objects.isNull(req.getParameter("id")) ?
+                new Department(req.getParameter("title"), req.getParameter("description"))
+                : new Department(Long.parseLong(req.getParameter("id")), req.getParameter("title"), req.getParameter("description"));
     }
 }

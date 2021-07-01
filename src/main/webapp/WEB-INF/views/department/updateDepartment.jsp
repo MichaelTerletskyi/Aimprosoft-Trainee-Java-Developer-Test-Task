@@ -10,23 +10,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Add New Department</title>
+    <title>Edit Department</title>
 
 </head>
 <body class="bg-light text-dark"><br>
 
 <div class="py-md-1" style="text-align: center;">
-    <h1 style="color: white">Add New Department</h1>
+    <h1 style="color: white">Edit ${title} </h1>
 </div>
 
 
 <form class="needs-validation" method="post" novalidate>
     <div class="mx-auto" style="width: 400px;">
+
+
         <div class="form-group px-md-5">
-
-
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" required>
+            <input type="text" class="form-control" id="title" name="title" value="${title}" required>
             <span class="error" style="color: red">${errors.DepartmentTitleCannotBeNull}</span>
             <span class="error" style="color: red">${errors.DepartmentTitleCannotBeEmpty}</span>
             <span class="error" style="color: red">${errors.DepartmentWithThisTitleIsAlreadyExist}</span>
@@ -36,7 +36,7 @@
             <h1></h1>
 
             <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" name="description" placeholder="Enter Description"
+            <input type="text" class="form-control" id="description" name="description" value="${description}"
                    required>
             <span class="error" style="color: red">${errors.DepartmentDescriptionCanContainsTo255Characters}</span>
 
@@ -44,10 +44,10 @@
 
             <div class="invalid-feedback">This field is mandatory.</div>
         </div>
-    </div>
 
+    </div>
     <div class="container" style="text-align: center">
-        <button type="submit" class="btn btn-success">ADD</button>
+        <button type="submit" class="btn btn-success">Update</button>
         <a href="${pageContext.request.contextPath}/departments">
             <button type="button" class="btn btn-primary">Return</button>
         </a>

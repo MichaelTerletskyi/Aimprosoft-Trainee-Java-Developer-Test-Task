@@ -45,13 +45,23 @@
         <url-pattern>/departments/add</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UpdateDepartment</servlet-name>
+        <servlet-class>controllers.department.UpdateDepartmentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateDepartment</servlet-name>
+        <url-pattern>/departments/update</url-pattern>
+    </servlet-mapping>
 
 
 
 
 
 
-  <!-- Employee block -->
+
+
+    <!-- Employee block -->
 
 
 

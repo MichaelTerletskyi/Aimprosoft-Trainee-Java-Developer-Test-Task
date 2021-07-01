@@ -27,16 +27,20 @@ public abstract class Validator<T> {
 
     public T buildModel(HttpServletRequest req) {
         T model = getPrimalModel(req);
-        Set<ConstraintViolation<T>> violations = validator.validate(model);
-        if (violations.size() == 0 && !existByUniqueField(model)) return model;
+        return validate(model);
+    }
 
+    private T validate(T model) {
+        Set<ConstraintViolation<T>> violations = validator.validate(model);
         Map<String, String> errorsMap = new HashMap<>();
 
         violations.forEach(v -> errorsMap.put(getCamelCaseErrorTitle(v.getMessage()), v.getMessage()));
         if (existByUniqueField(model)) {
             errorsMap.put(getCamelCaseErrorTitle(uniqueFieldError()), uniqueFieldError());
         }
-        throw new ValidationException(validationFailedMessage(), errorsMap);
+        if (errorsMap.size() > 0)
+            throw new ValidationException(validationFailedMessage(), errorsMap);
+        return model;
     }
 
     private String getCamelCaseErrorTitle(String s) {
@@ -47,7 +51,6 @@ public abstract class Validator<T> {
             sb.append(String.valueOf(currentString.charAt(0)).toUpperCase());
             sb.append(currentString.substring(1));
         }
-        System.out.println(sb.toString());
         return sb.toString();
     }
 }

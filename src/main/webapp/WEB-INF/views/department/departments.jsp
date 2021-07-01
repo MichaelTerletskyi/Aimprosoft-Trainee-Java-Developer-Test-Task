@@ -60,8 +60,7 @@
                             </a>
                         </td>
                         <td>
-                                <%--TODO--%>
-                            <a href="${pageContext.request.contextPath}/update_department?id=<c:out value='${department.getId()}'/>">
+                            <a href="${pageContext.request.contextPath}/departments/update?id=<c:out value='${department.getId()}'/>">
                                 <button type="button" class="btn btn-outline-info">Update</button>
                             </a>
                         </td>
