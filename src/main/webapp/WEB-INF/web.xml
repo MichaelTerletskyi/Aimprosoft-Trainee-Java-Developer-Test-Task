@@ -36,6 +36,15 @@
         <url-pattern>/departments</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CreateDepartment</servlet-name>
+        <servlet-class>controllers.department.CreateDepartmentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateDepartment</servlet-name>
+        <url-pattern>/departments/add</url-pattern>
+    </servlet-mapping>
+
 
 
 

@@ -50,8 +50,8 @@ public class Department implements Serializable {
                       @Size(min = 1, max = 64, message = DEPARTMENT_TITLE_SIZE_ERROR_MESSAGE)
                       @Pattern(regexp = "[a-zA-Zа-яА-Я ]*", message = DEPARTMENT_TITLE_PATTERN_ERROR_MESSAGE) String title,
                       @Size(max = 255, message = DEPARTMENT_DESCRIPTION_SIZE_ERROR_MESSAGE) String description) {
-        this.title = title;
-        this.description = description;
+        this.title = title.strip();
+        this.description = description.strip();
     }
 
     public Long getId() {

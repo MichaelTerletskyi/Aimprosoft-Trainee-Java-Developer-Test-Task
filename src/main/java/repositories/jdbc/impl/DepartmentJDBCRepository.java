@@ -24,12 +24,12 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
 
     @Override
     protected String createQuery() {
-        return "INSERT INTO test_database.departments(title) VALUES (?)";
+        return "INSERT INTO test_database.departments(title, description) VALUES (?, ?)";
     }
 
     @Override
     protected String getByIdQuery() {
-        return "SELECT department_id, title FROM test_database.departments WHERE department_id = ?";
+        return "SELECT department_id, title, description FROM test_database.departments WHERE department_id = ?";
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
 
     @Override
     protected String updateQuery() {
-        return "UPDATE test_database.departments SET title = ? WHERE department_id = ?";
+        return "UPDATE test_database.departments SET title = ?, description = ? WHERE department_id = ?";
     }
 
     @Override
@@ -55,12 +55,13 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
     @Override
     protected void preparedStatementExtract(PreparedStatement preparedStatement, Department element) throws SQLException {
         preparedStatement.setString(1, element.getTitle());
+        preparedStatement.setString(2, element.getDescription());
     }
 
     @Override
     protected void preparedStatementExtractUpdate(PreparedStatement preparedStatement, Department element) throws SQLException {
         preparedStatementExtract(preparedStatement, element);
-        preparedStatement.setLong(2, element.getId());
+        preparedStatement.setLong(3, element.getId());
     }
 
     @Override
