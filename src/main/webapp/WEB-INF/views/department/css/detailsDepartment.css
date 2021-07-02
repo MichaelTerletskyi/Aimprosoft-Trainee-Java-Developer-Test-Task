@@ -1,5 +1,5 @@
 body {
-    background: url("https://images.axios.com/e8b1CEMRd5nC0icrUmiLtp_HM2Y=/0x0:2000x1125/1920x1080/2019/02/06/1549453373829.jpg");
+    background: url("https://iresis.files.wordpress.com/2017/04/stats-chart.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -9,7 +9,7 @@ body {
 h1 {
     font-family: "Quicksand", sans-serif;
     font-size: 30px;
-    color: black;
+    color: white;
 }
 
 h2 {
@@ -22,4 +22,53 @@ a {
     font-family: "Quicksand", sans-serif;
     font-size: 15px;
     color: black;
+}
+
+body {
+    font-family: "Quicksand", sans-serif;
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+}
+
+.about-section {
+    padding: 50px;
+    text-align: center;
+    background: url("https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-business-chart-statistics-digital-print-ads-image_145011.jpg");
+    color: white;
+}
+
+.container {
+    padding: 0 16px;
+}
+
+.container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+@media screen and (max-width: 650px) {
+    .column {
+        width: 100%;
+        display: block;
+    }
 }

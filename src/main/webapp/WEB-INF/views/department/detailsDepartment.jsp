@@ -38,19 +38,87 @@
 <div class="container text-center">
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
-            <h1>${title} Details</h1>
+            <div class="about-section">
+                <h1>Details of ${title}</h1>
+                <h2 style="color: white;">${description}.</h2>
+            </div>
 
-            <br>
-            <br>
+            <div class="row">
+                <div class="column">
+                    <div class="card">
+                        <div class="container">
 
-            <h2>ID : ${id} </h2>
-            <h2>Title : ${title} </h2>
-            <h2>Description : ${description} </h2>
-            <h2>Amount of employees : ${amountOfEmployees} </h2>
-            <h2>Head : ${fullNameOfHead} </h2>
-            <h2>Average salary per hour : ${averageSalaryPerHour} $ </h2>
-            <h2>Total salary : ${totalSalary} $</h2>
-            <h2>Average age : ${averageAge} years </h2>
+                            <br>
+
+                            <h2>ID</h2>
+                            <h1 style="color: black">${id}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <div class="container">
+
+                            <br>
+
+                            <h2>Amount of employees</h2>
+                            <h1 style="color: black">${amountOfEmployees} peoples</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <div class="container">
+
+                            <br>
+
+                            <h2>Head</h2>
+                            <h1 style="color: black">${fullNameOfHead}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="column">
+                    <div class="card">
+                        <div class="container">
+
+                            <br>
+
+                            <h2>Average salary per hour</h2>
+                            <h1 style="color: black">${averageSalaryPerHour} $</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <div class="container">
+
+                            <br>
+
+                            <h2>Total salary</h2>
+                            <h1 style="color: black">${totalSalary} $</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <div class="container">
+
+                            <br>
+
+                            <h2>Average Age</h2>
+                            <h1 style="color: black">${averageAge} years</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
