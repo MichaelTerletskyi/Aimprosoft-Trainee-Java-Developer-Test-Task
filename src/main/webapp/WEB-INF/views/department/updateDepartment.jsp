@@ -11,48 +11,77 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Edit Department</title>
-
+    <style>
+        <%@include file="css/genericDepartment.css" %>
+        <%@include file="css/updateDepartment.css" %>
+    </style>
 </head>
-<body class="bg-light text-dark"><br>
 
-<div class="py-md-1" style="text-align: center;">
-    <h1 style="color: white">Edit ${title} </h1>
-</div>
+<body>
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="${pageContext.request.contextPath}/departments" style="color:black; font-size: 30px">
+                    RETURN TO DEPARTMENTS
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <form class="needs-validation" method="post" novalidate>
-    <div class="mx-auto" style="width: 400px;">
+    <div class="container contact">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="contact-info">
+                    <img src="https://www.allianceproject.com/wp-content/uploads/2019/07/buildings.png"
+                         alt="image"/>
+                    <h2>Create</h2>
+                    <h4>Department</h4>
+                </div>
+            </div>
 
+            <div class="col-md-9">
+                <div class="contact-form">
 
-        <div class="form-group px-md-5">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" value="${title}" required>
-            <span class="error" style="color: red">${errors.DepartmentTitleCannotBeNull}</span>
-            <span class="error" style="color: red">${errors.DepartmentTitleCannotBeEmpty}</span>
-            <span class="error" style="color: red">${errors.DepartmentWithThisTitleIsAlreadyExist}</span>
-            <span class="error" style="color: red">${errors.DepartmentTitleCanContainsFrom1To64Characters}</span>
-            <span class="error" style="color: red">${errors.DepartmentTitleCanContainsOnlyLatinsOrCyrillicLetter}</span>
+                    <div class="form-group">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
 
-            <h1></h1>
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" value="${title}" required>
+                        <span class="error">${errors.DepartmentTitleCannotBeNull}</span>
+                        <span class="error">${errors.DepartmentTitleCannotBeEmpty}</span>
+                        <span class="error">${errors.DepartmentWithThisTitleIsAlreadyExist}</span>
+                        <span class="error">${errors.DepartmentTitleCanContainsFrom1To64Characters}</span>
+                        <span class="error">${errors.DepartmentTitleCanContainsOnlyLatinsOrCyrillicLetter}</span>
 
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" name="description" value="${description}"
-                   required>
-            <span class="error" style="color: red">${errors.DepartmentDescriptionCanContainsTo255Characters}</span>
+                        <br/>
 
-            <h1></h1>
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" id="description" name="description" value="${description}" required>
+                        <span class="error">${errors.DepartmentDescriptionCanContainsTo255Characters}</span>
 
-            <div class="invalid-feedback">This field is mandatory.</div>
+                        <br/>
+
+                        <div class="invalid-feedback">This field is mandatory.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
-    <div class="container" style="text-align: center">
-        <button type="submit" class="btn btn-success">Update</button>
-        <a href="${pageContext.request.contextPath}/departments">
-            <button type="button" class="btn btn-primary">Return</button>
-        </a>
-    </div>
-
 </form>
 </body>
 </html>

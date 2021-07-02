@@ -13,18 +13,22 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Departments</title>
 
+    <style>
+        <%@include file="css/genericDepartment.css" %>
+        <%@include file="css/departments.css" %>
+    </style>
+
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light text-center">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/departments/add"
-                   style="color:black; font-family: 'Arial Black',serif; font-size: 30px">ADD
-                    NEW DEPARTMENT<span
-                            class="sr-only">(current)</span></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/departments/add" style="color:black; font-size: 30px">
+                    ADD NEW DEPARTMENT
+                </a>
             </li>
         </ul>
     </div>
@@ -33,7 +37,11 @@
 <div class="container text-center">
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
-            <h1>Departments</h1><br>
+
+            <h6>Departments</h6>
+
+            <br>
+
             <table class="table center">
                 <tr>
                     <th>ID</th>
@@ -41,10 +49,10 @@
                     <th>Description</th>
                     <th>Amount of Employees</th>
                     <th>Head</th>
-                    <th>Employees</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                    <th>Details</th>
+                    <th>Actions</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 <c:forEach var="department" items="${departments}">
                     <tr>
@@ -54,9 +62,13 @@
                         <td><c:out value="${department.getEmployees().size()}"/></td>
                         <td><c:out value="${department.getFullNameOfHead()}"/></td>
                         <td>
-                                <%--TODO--%>
                             <a href="${pageContext.request.contextPath}/employee?id=<c:out value='${department.getId()}'/>">
-                                <button type="button" class="btn btn-outline-success">View</button>
+                                <button type="button" class="btn btn-outline-success">Employees</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/details?id=<c:out value='${department.getId()}'/>">
+                                <button type="button" class="btn btn-outline-warning">Details</button>
                             </a>
                         </td>
                         <td>
@@ -67,12 +79,6 @@
                         <td>
                             <a href="${pageContext.request.contextPath}/departments/delete?id=<c:out value='${department.getId()}'/>">
                                 <button type="button" class="btn btn-outline-danger">Delete</button>
-                            </a>
-                        </td>
-                        <td>
-                                <%--TODO--%>
-                            <a href="${pageContext.request.contextPath}/details?id=<c:out value='${department.getId()}'/>">
-                                <button type="button" class="btn btn-outline-warning">Details</button>
                             </a>
                         </td>
                     </tr>
