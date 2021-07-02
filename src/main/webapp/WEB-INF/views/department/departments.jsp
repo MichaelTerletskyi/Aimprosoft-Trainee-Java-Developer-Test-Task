@@ -65,8 +65,7 @@
                             </a>
                         </td>
                         <td>
-                                <%--TODO--%>
-                            <a href="${pageContext.request.contextPath}/delete_department?id=<c:out value='${department.getId()}'/>">
+                            <a href="${pageContext.request.contextPath}/departments/delete?id=<c:out value='${department.getId()}'/>">
                                 <button type="button" class="btn btn-outline-danger">Delete</button>
                             </a>
                         </td>

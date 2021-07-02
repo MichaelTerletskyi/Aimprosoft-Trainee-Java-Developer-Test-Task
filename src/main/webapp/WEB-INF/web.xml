@@ -54,6 +54,15 @@
         <url-pattern>/departments/update</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteDepartment</servlet-name>
+        <servlet-class>controllers.department.DeleteDepartmentController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteDepartment</servlet-name>
+        <url-pattern>/departments/delete</url-pattern>
+    </servlet-mapping>
+
 
 
 

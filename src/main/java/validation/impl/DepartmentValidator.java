@@ -30,8 +30,8 @@ public class DepartmentValidator extends Validator<Department> {
 
     @Override
     protected boolean existByUniqueField(Department department) {
-        Long idByTitle = null;
         boolean existByTitle = service().existByTitle(department.getTitle());
+        Long idByTitle = null;
         try {
             idByTitle = service().getIdByTitle(department.getTitle());
         } catch (EntityNotFoundException e) {
@@ -49,8 +49,8 @@ public class DepartmentValidator extends Validator<Department> {
 
     @Override
     protected Department getPrimalModel(HttpServletRequest req) {
-        return Objects.isNull(req.getParameter("id")) ?
-                new Department(req.getParameter("title"), req.getParameter("description"))
+        return Objects.isNull(req.getParameter("id"))
+                ? new Department(req.getParameter("title"), req.getParameter("description"))
                 : new Department(Long.parseLong(req.getParameter("id")), req.getParameter("title"), req.getParameter("description"));
     }
 }
