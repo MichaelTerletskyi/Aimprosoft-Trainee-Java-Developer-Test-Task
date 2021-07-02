@@ -1,4 +1,4 @@
-package controllers.department;
+package controllers.employee;
 
 import models.Department;
 import services.impl.DepartmentService;
@@ -16,8 +16,8 @@ import java.io.IOException;
  * @Extends of {@link HttpServlet} class.
  */
 
-@WebServlet(name = "DetailsDepartment", urlPatterns = "/departments/details")
-public class DetailsDepartmentController extends HttpServlet {
+@WebServlet(name = "EmployeesOfDepartment", urlPatterns = "/departments/employees")
+public class EmployeesOfDepartmentController extends HttpServlet {
     private DepartmentService departmentService = new DepartmentService();
 
     @Override
@@ -30,14 +30,10 @@ public class DetailsDepartmentController extends HttpServlet {
         Department department = departmentService.getById(Long.parseLong(req.getParameter("id")), true);
         req.setAttribute("id", department.getId());
         req.setAttribute("title", department.getTitle());
-        req.setAttribute("description", department.getDescription());
-        req.setAttribute("amountOfEmployees", department.getEmployees().size());
-        req.setAttribute("fullNameOfHead", department.getFullNameOfHead());
-        req.setAttribute("averageSalaryPerHour", department.getAverageSalaryPerHour());
-        req.setAttribute("totalSalary", department.getTotalSalary());
-        req.setAttribute("averageAge", department.getAverageAge());
-        req.getRequestDispatcher("/WEB-INF/views/department/detailsDepartment.jsp").forward(req, resp);
+        req.setAttribute("employees", department.getEmployees());
+        req.getRequestDispatcher("/WEB-INF/views/employee/employeesOfDepartment.jsp").forward(req, resp);
     }
+
 
     @Override
     public void destroy() {

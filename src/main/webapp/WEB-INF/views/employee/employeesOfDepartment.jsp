@@ -11,11 +11,11 @@
     <link rel="icon" href="https://www.flaticon.com/svg/static/icons/svg/1126/1126202.svg">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Departments</title>
+    <title>Employees of ${title}</title>
 
     <style>
-        <%@include file="css/genericDepartment.css" %>
-        <%@include file="css/allDepartments.css" %>
+        <%@include file="css/genericEmployee.css" %>
+        <%@include file="css/employeesOfDepartment.css" %>
     </style>
 
 </head>
@@ -26,8 +26,8 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/departments/add" style="color:black; font-size: 30px">
-                    ADD NEW DEPARTMENT
+                <a class="nav-link" href="${pageContext.request.contextPath}/departments" style="color:black; font-size: 30px">
+                    RETURN TO DEPARTMENTS
                 </a>
             </li>
         </ul>
@@ -38,42 +38,43 @@
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
 
-            <h6>Departments</h6>
+            <h6>Employees of ${title}</h6>
 
             <br>
 
             <table class="table center">
                 <tr>
                     <th>ID</th>
-                    <th>Title</th>
-                    <th>Description</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Head</th>
                     <th>Actions</th>
                     <th></th>
                     <th></th>
                     <th></th>
                 </tr>
-                <c:forEach var="department" items="${departments}">
+                <c:forEach var="employee" items="${employees}">
                     <tr>
-                        <td><c:out value="${department.getId()}"/></td>
-                        <td><c:out value="${department.getTitle()}"/></td>
-                        <td><c:out value="${department.getDescription()}"/></td>
+                        <td><c:out value="${employee.getId()}"/></td>
+                        <td><c:out value="${employee.getFirstName()}"/></td>
+                        <td><c:out value="${employee.getLastName()}"/></td>
+                        <td><c:out value="${employee.isHead()}"/></td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/departments/employees?id=<c:out value='${department.getId()}'/>">
-                                <button type="button" class="btn btn-outline-success">Employees</button>
+                            <a href="${pageContext.request.contextPath}/employee?id=<c:out value='${employee.getId()}'/>">
+                                <button type="button" class="btn btn-outline-success">Head</button>
                             </a>
                         </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/departments/details?id=<c:out value='${department.getId()}'/>">
+                            <a href="${pageContext.request.contextPath}/employee/update?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-warning">Details</button>
                             </a>
-                        </td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/departments/update?id=<c:out value='${department.getId()}'/>">
+                        </td>                        <td>
+                            <a href="${pageContext.request.contextPath}/employee/update?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-info">Update</button>
                             </a>
                         </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/departments/delete?id=<c:out value='${department.getId()}'/>">
+                            <a href="${pageContext.request.contextPath}/employee/delete?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-danger">Delete</button>
                             </a>
                         </td>
@@ -85,3 +86,10 @@
 </div>
 </body>
 </html>
+
+
+<td>
+    <a href="${pageContext.request.contextPath}/departments/details?id=<c:out value='${department.getId()}'/>">
+        <button type="button" class="btn btn-outline-warning">Details</button>
+    </a>
+</td>

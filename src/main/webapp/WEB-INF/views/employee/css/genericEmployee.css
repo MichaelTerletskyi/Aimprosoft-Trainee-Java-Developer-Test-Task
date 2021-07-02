@@ -1,0 +1,57 @@
+th {
+    font-size: 15px;
+    font-family: "Quicksand", sans-serif;
+    padding: 10px 15px;
+    text-align: left;
+    text-transform: unset;
+}
+
+td {
+    font-family: "Quicksand", sans-serif;
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 10px;
+    color: #fff;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+br {
+    text-align: center;
+}
+
+input {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    color: black;
+}
+
+form {
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+.field {
+    clear: both;
+    text-align: right;
+}
+
+label {
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    color: black;
+    float: left;
+}
+
+h1 {
+    font-family: "Quicksand", sans-serif;
+}
+
+span {
+    font-family: "Quicksand", sans-serif;
+    color: red;
+}
