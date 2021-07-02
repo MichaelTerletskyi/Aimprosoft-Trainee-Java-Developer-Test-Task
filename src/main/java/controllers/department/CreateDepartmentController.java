@@ -7,6 +7,7 @@ import validation.impl.DepartmentValidator;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import java.io.IOException;
  * @Extends of {@link HttpServlet} class.
  */
 
+@WebServlet(name = "AddDepartment", urlPatterns = "/departments/add")
 public class CreateDepartmentController extends HttpServlet {
     private DepartmentValidator departmentValidator = new DepartmentValidator();
     private DepartmentService departmentService = new DepartmentService();

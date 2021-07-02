@@ -1,0 +1,25 @@
+body {
+    background: url("https://images.axios.com/e8b1CEMRd5nC0icrUmiLtp_HM2Y=/0x0:2000x1125/1920x1080/2019/02/06/1549453373829.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+h1 {
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    color: black;
+}
+
+h2 {
+    font-family: "Quicksand", sans-serif;
+    font-size: 20px;
+    color: black;
+}
+
+a {
+    font-family: "Quicksand", sans-serif;
+    font-size: 15px;
+    color: black;
+}

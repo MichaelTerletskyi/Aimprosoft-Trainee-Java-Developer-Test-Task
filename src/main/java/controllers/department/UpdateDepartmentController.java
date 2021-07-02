@@ -7,6 +7,7 @@ import validation.impl.DepartmentValidator;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import java.io.IOException;
  * @Extends of {@link HttpServlet} class.
  */
 
+@WebServlet(name = "UpdateDepartment", urlPatterns = "/departments/update")
 public class UpdateDepartmentController extends HttpServlet {
     private DepartmentService departmentService = new DepartmentService();
     private DepartmentValidator departmentValidator = new DepartmentValidator();
@@ -52,5 +54,4 @@ public class UpdateDepartmentController extends HttpServlet {
     public void destroy() {
         System.out.println(String.format("%s %s", "Servlet", "has been destroyed"));
     }
-
 }

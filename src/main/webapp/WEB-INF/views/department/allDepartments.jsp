@@ -15,7 +15,7 @@
 
     <style>
         <%@include file="css/genericDepartment.css" %>
-        <%@include file="css/departments.css" %>
+        <%@include file="css/allDepartments.css" %>
     </style>
 
 </head>
@@ -67,7 +67,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/details?id=<c:out value='${department.getId()}'/>">
+                            <a href="${pageContext.request.contextPath}/departments/details?id=<c:out value='${department.getId()}'/>">
                                 <button type="button" class="btn btn-outline-warning">Details</button>
                             </a>
                         </td>

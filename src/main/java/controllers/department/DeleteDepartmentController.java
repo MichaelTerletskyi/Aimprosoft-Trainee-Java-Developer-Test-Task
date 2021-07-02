@@ -3,6 +3,7 @@ package controllers.department;
 import services.impl.DepartmentService;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import java.io.IOException;
  * @Extends of {@link HttpServlet} class.
  */
 
+@WebServlet(name = "DeleteDepartment", urlPatterns = "/departments/delete")
 public class DeleteDepartmentController extends HttpServlet {
     private DepartmentService departmentService = new DepartmentService();
 

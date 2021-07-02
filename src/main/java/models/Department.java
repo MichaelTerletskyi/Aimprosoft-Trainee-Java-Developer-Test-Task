@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import java.util.Set;
 
@@ -97,7 +99,7 @@ public class Department implements Serializable {
         this.employees = employees;
     }
 
-    public Employee getHead() {
+    private Employee getHead() {
         if (Objects.isNull(getEmployees())) {
             throw new FetchFailedException("Employees fetch has been failed, try to repeat attempt with fetchEmployees = true");
         }
@@ -113,6 +115,30 @@ public class Department implements Serializable {
             e.printStackTrace();
         }
         return "No Head";
+    }
+
+    public BigDecimal getAverageSalaryPerHour() {
+        return getEmployees().size() == 0
+                ? BigDecimal.ZERO
+                : getTotalSalary().divide(BigDecimal.valueOf(getEmployees().size()), RoundingMode.HALF_DOWN);
+    }
+
+    public BigDecimal getTotalSalary() {
+        return getEmployees()
+                .stream()
+                .map(Employee::getSalaryPerHour)
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
+    }
+
+    public BigDecimal getAverageAge() {
+        if (getEmployees().size() == 0) return BigDecimal.valueOf(0);
+        BigDecimal totalAge = getEmployees()
+                .stream()
+                .map(employee -> BigDecimal.valueOf(employee.getAge()))
+                .reduce(BigDecimal::add)
+                .orElse(BigDecimal.ZERO);
+        return totalAge.divide(BigDecimal.valueOf(getEmployees().size()), RoundingMode.HALF_DOWN);
     }
 
     @Override

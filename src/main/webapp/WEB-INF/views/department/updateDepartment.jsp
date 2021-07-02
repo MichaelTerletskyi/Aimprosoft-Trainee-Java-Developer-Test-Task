@@ -38,7 +38,7 @@
                 <div class="contact-info">
                     <img src="https://www.allianceproject.com/wp-content/uploads/2019/07/buildings.png"
                          alt="image"/>
-                    <h2>Create</h2>
+                    <h2>Edit</h2>
                     <h4>Department</h4>
                 </div>
             </div>

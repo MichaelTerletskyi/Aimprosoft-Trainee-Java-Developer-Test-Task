@@ -4,6 +4,7 @@ import services.impl.DepartmentService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,8 @@ import java.io.IOException;
  * @Extends of {@link HttpServlet} class.
  */
 
-public class DepartmentsController extends HttpServlet {
+@WebServlet(name = "AllDepartments", urlPatterns = "/departments")
+public class AllDepartmentsController extends HttpServlet {
     private DepartmentService departmentService = new DepartmentService();
 
     @Override
@@ -25,7 +27,7 @@ public class DepartmentsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("departments", departmentService.getAll(true));
-        req.getRequestDispatcher("/WEB-INF/views/department/departments.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/department/allDepartments.jsp").forward(req, resp);
     }
 
     @Override
