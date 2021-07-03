@@ -29,7 +29,9 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/departments" style="color:black; font-size: 30px">
                     RETURN TO DEPARTMENTS
                 </a>
+            </li>
 
+            <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/departments/employees/add" style="color:black; font-size: 30px">
                     ADD NEW EMPLOYEE
                 </a>
@@ -64,7 +66,7 @@
                         <td><c:out value="${employee.getEmail()}"/></td>
                         <td><c:out value="${employee.isHead()}"/></td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/employee/promote/to/head?id=<c:out value='${employee.getId()}'/>">
+                            <a href="${pageContext.request.contextPath}/departments/employees/promote/to/head?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-success">Promote to Head</button>
                             </a>
                         </td>
@@ -72,13 +74,14 @@
                             <a href="${pageContext.request.contextPath}/employee/update?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-warning">Details</button>
                             </a>
-                        </td>                        <td>
+                        </td>
+                        <td>
                             <a href="${pageContext.request.contextPath}/employee/update?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-info">Edit</button>
                             </a>
                         </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/employee/delete?id=<c:out value='${employee.getId()}'/>">
+                            <a href="${pageContext.request.contextPath}/departments/employees/delete?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-danger">Delete</button>
                             </a>
                         </td>
@@ -90,10 +93,3 @@
 </div>
 </body>
 </html>
-
-
-<td>
-    <a href="${pageContext.request.contextPath}/departments/details?id=<c:out value='${department.getId()}'/>">
-        <button type="button" class="btn btn-outline-warning">Details</button>
-    </a>
-</td>

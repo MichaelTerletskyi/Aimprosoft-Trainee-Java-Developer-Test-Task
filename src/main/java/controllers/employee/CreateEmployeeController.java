@@ -15,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * @Create 7/03/2021
+ * @Extends of {@link HttpServlet} class.
+ */
+
 @WebServlet(name = "AddEmployee", urlPatterns = "/departments/employees/add")
 public class CreateEmployeeController extends HttpServlet {
     private final DepartmentService departmentService = new DepartmentService();

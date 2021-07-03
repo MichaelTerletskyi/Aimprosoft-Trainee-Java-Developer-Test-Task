@@ -99,7 +99,7 @@ public class Department implements Serializable {
         this.employees = employees;
     }
 
-    private Employee getHead() {
+    public Employee getHead() {
         if (Objects.isNull(getEmployees())) {
             throw new FetchFailedException("Employees fetch has been failed, try to repeat attempt with fetchEmployees = true");
         }
