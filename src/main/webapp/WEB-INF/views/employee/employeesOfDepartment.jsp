@@ -29,6 +29,10 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/departments" style="color:black; font-size: 30px">
                     RETURN TO DEPARTMENTS
                 </a>
+
+                <a class="nav-link" href="${pageContext.request.contextPath}/departments/employees/add" style="color:black; font-size: 30px">
+                    ADD NEW EMPLOYEE
+                </a>
             </li>
         </ul>
     </div>
@@ -44,9 +48,9 @@
 
             <table class="table center">
                 <tr>
-                    <th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Email</th>
                     <th>Head</th>
                     <th>Actions</th>
                     <th></th>
@@ -55,13 +59,13 @@
                 </tr>
                 <c:forEach var="employee" items="${employees}">
                     <tr>
-                        <td><c:out value="${employee.getId()}"/></td>
                         <td><c:out value="${employee.getFirstName()}"/></td>
                         <td><c:out value="${employee.getLastName()}"/></td>
+                        <td><c:out value="${employee.getEmail()}"/></td>
                         <td><c:out value="${employee.isHead()}"/></td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/employee?id=<c:out value='${employee.getId()}'/>">
-                                <button type="button" class="btn btn-outline-success">Head</button>
+                            <a href="${pageContext.request.contextPath}/employee/promote/to/head?id=<c:out value='${employee.getId()}'/>">
+                                <button type="button" class="btn btn-outline-success">Promote to Head</button>
                             </a>
                         </td>
                         <td>
@@ -70,7 +74,7 @@
                             </a>
                         </td>                        <td>
                             <a href="${pageContext.request.contextPath}/employee/update?id=<c:out value='${employee.getId()}'/>">
-                                <button type="button" class="btn btn-outline-info">Update</button>
+                                <button type="button" class="btn btn-outline-info">Edit</button>
                             </a>
                         </td>
                         <td>

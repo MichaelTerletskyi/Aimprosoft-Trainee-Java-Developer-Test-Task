@@ -11,6 +11,7 @@ public interface IEmployeeValidationMessages {
     String EMPLOYEE_LAST_NAME_SIZE_ERROR_MESSAGE = "Employee Last Name can contains from 1 to 32 letters";
     String EMPLOYEE_LAST_NAME_PATTERN_ERROR_MESSAGE = "Employee Last Name can contains only latins or cyrillic letter";
 
+    String EMPLOYEE_EMAIL_UNIQUE_ERROR_MESSAGE = "Employee with this email is already exist";
     String EMPLOYEE_EMAIL_NULL_ERROR_MESSAGE = "Employee Email cannot be null";
     String EMPLOYEE_EMAIL_EMPTY_ERROR_MESSAGE = "Employee Email cannot be empty";
     String EMPLOYEE_EMAIL_EMAIL_ERROR_MESSAGE = "Incorrect Email";

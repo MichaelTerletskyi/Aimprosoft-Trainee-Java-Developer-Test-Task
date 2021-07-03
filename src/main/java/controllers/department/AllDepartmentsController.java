@@ -17,7 +17,7 @@ import java.io.IOException;
 
 @WebServlet(name = "AllDepartments", urlPatterns = "/departments")
 public class AllDepartmentsController extends HttpServlet {
-    private DepartmentService departmentService = new DepartmentService();
+    private final DepartmentService departmentService = new DepartmentService();
 
     @Override
     public void init(ServletConfig config) {

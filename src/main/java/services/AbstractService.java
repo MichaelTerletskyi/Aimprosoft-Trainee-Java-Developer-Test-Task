@@ -11,8 +11,8 @@ import java.util.Set;
 public abstract class AbstractService<T> {
     protected abstract AbstractJDBCRepository<T, Long> jdbcRepository();
 
-    public void create(T element) {
-        jdbcRepository().create(element);
+    public T create(T element) {
+        return jdbcRepository().create(element);
     }
 
     public T getById(Long id) {

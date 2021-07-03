@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @WebServlet(name = "DeleteDepartment", urlPatterns = "/departments/delete")
 public class DeleteDepartmentController extends HttpServlet {
-    private DepartmentService departmentService = new DepartmentService();
+    private final DepartmentService departmentService = new DepartmentService();
 
     @Override
     public void init(ServletConfig config) {

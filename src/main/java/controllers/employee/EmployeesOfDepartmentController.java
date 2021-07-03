@@ -18,7 +18,8 @@ import java.io.IOException;
 
 @WebServlet(name = "EmployeesOfDepartment", urlPatterns = "/departments/employees")
 public class EmployeesOfDepartmentController extends HttpServlet {
-    private DepartmentService departmentService = new DepartmentService();
+    private final DepartmentService departmentService = new DepartmentService();
+    static Long DEPARTMENT_ID ;
 
     @Override
     public void init(ServletConfig config) {
@@ -27,13 +28,13 @@ public class EmployeesOfDepartmentController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Department department = departmentService.getById(Long.parseLong(req.getParameter("id")), true);
+        DEPARTMENT_ID = Long.parseLong(req.getParameter("id"));
+        Department department = departmentService.getById(DEPARTMENT_ID, true);
         req.setAttribute("id", department.getId());
         req.setAttribute("title", department.getTitle());
         req.setAttribute("employees", department.getEmployees());
         req.getRequestDispatcher("/WEB-INF/views/employee/employeesOfDepartment.jsp").forward(req, resp);
     }
-
 
     @Override
     public void destroy() {

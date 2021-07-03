@@ -44,7 +44,6 @@
 
             <table class="table center">
                 <tr>
-                    <th>ID</th>
                     <th>Title</th>
                     <th>Description</th>
                     <th>Actions</th>
@@ -54,7 +53,6 @@
                 </tr>
                 <c:forEach var="department" items="${departments}">
                     <tr>
-                        <td><c:out value="${department.getId()}"/></td>
                         <td><c:out value="${department.getTitle()}"/></td>
                         <td><c:out value="${department.getDescription()}"/></td>
                         <td>
@@ -69,7 +67,7 @@
                         </td>
                         <td>
                             <a href="${pageContext.request.contextPath}/departments/update?id=<c:out value='${department.getId()}'/>">
-                                <button type="button" class="btn btn-outline-info">Update</button>
+                                <button type="button" class="btn btn-outline-info">Edit</button>
                             </a>
                         </td>
                         <td>

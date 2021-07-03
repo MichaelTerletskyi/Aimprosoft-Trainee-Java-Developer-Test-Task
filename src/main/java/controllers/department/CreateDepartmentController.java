@@ -20,8 +20,8 @@ import java.io.IOException;
 
 @WebServlet(name = "AddDepartment", urlPatterns = "/departments/add")
 public class CreateDepartmentController extends HttpServlet {
-    private DepartmentValidator departmentValidator = new DepartmentValidator();
-    private DepartmentService departmentService = new DepartmentService();
+    private final DepartmentValidator departmentValidator = new DepartmentValidator();
+    private final DepartmentService departmentService = new DepartmentService();
     private final String pathUrl = "/WEB-INF/views/department/createDepartment.jsp";
 
     @Override
