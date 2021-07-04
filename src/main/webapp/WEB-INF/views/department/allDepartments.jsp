@@ -27,7 +27,7 @@
         <ul class="navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/departments/add" style="color:black; font-size: 30px">
-                    ADD NEW DEPARTMENT
+                    Add new department
                 </a>
             </li>
         </ul>

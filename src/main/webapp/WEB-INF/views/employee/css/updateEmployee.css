@@ -1,0 +1,14 @@
+body {
+    background: url("https://www.linkhr.ca/wp-content/uploads/revslider/main_slider/slider_2.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.col-md-3 {
+    background: green;
+    padding: 4%;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}

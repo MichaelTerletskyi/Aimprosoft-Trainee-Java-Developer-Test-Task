@@ -16,18 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * @Create 7/03/2021
- * @Extends of {@link HttpServlet} class.
- */
-
-@WebServlet(name = "AddEmployee", urlPatterns = "/departments/employees/add")
-public class CreateEmployeeController extends HttpServlet {
-    private final DepartmentService departmentService = new DepartmentService();
+@WebServlet(name = "EditEmployee", urlPatterns = "/departments/employees/edit")
+public class UpdateEmployeeController extends HttpServlet {
     private final EmployeeService employeeService = new EmployeeService();
+    private final DepartmentService departmentService = new DepartmentService();
     private final EmployeeValidator employeeValidator = new EmployeeValidator();
-    private final String pathUrl = "/WEB-INF/views/employee/createEmployee.jsp";
-    private Boolean validationFailed = false;
+    private final String pathUrl = "/WEB-INF/views/employee/updateEmployee.jsp";
 
     @Override
     public void init(ServletConfig config) {
@@ -36,27 +30,28 @@ public class CreateEmployeeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Employee employee = employeeService.getById(Long.parseLong(req.getParameter("id")));
         Department department = departmentService.getById(EmployeesOfDepartmentController.DEPARTMENT_ID);
         req.setAttribute("departmentId", department.getId());
         req.setAttribute("departmentTitle", department.getTitle());
+        req.setAttribute("firstName", employee.getFirstName());
+        req.setAttribute("lastName", employee.getLastName());
+        req.setAttribute("email", employee.getEmail());
+        req.setAttribute("salaryPerHour", employee.getSalaryPerHour());
+        req.setAttribute("dateOfBirth", employee.getDateOfBirth());
         req.getRequestDispatcher(pathUrl).forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             Employee employee = employeeValidator.buildModel(req);
-            employeeService.create(employee);
+            employeeService.update(employee);
         } catch (ValidationException e) {
             Map<String, String> errors = e.getErrors();
-            validationFailed = !errors.isEmpty();
             e.printStackTrace();
             req.setAttribute("errors", errors);
             req.getRequestDispatcher(pathUrl).forward(req, resp);
-        }
-
-        if (!validationFailed) {
-            departmentService.addEmployee(EmployeesOfDepartmentController.DEPARTMENT_ID, employeeService.getIdByEmail(req.getParameter("email")));
         }
         resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" + EmployeesOfDepartmentController.DEPARTMENT_ID);
     }

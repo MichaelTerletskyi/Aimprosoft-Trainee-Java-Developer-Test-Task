@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Add New Employee for ${departmentTitle}</title>
+    <title>Edit ${firstName} ${lastName}</title>
     <style>
         <%@include file="css/genericEmployee.css" %>
-        <%@include file="css/createEmployee.css" %>
+        <%@include file="css/updateEmployee.css" %>
     </style>
 </head>
 
@@ -40,7 +40,7 @@
                 <div class="contact-info">
                     <img src="https://i.dlpng.com/static/png/6844306_preview.png"
                          alt="image" width="300"/>
-                    <h2>Create</h2>
+                    <h2>Edit</h2>
                     <h4>Employee</h4>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         <br/>
 
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName" required>
+                        <input type="text" class="form-control" id="firstName" name="firstName" value="${firstName}" required>
                         <span class="error">${errors.EmployeeFirstNameCannotBeNull}</span>
                         <span class="error">${errors.EmployeeFirstNameCannotBeEmpty}</span>
                         <span class="error">${errors.EmployeeFirstNameCanContainsFrom1To32Letters}</span>
@@ -61,7 +61,7 @@
                         <br/>
 
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" name="lastName" required>
+                        <input type="text" class="form-control" id="lastName" name="lastName" value="${lastName}" required>
                         <span class="error">${errors.EmployeeLastNameCannotBeNull}</span>
                         <span class="error">${errors.EmployeeLastNameCannotBeEmpty}</span>
                         <span class="error">${errors.EmployeeLastNameCanContainsFrom1To32Letters}</span>
@@ -70,7 +70,7 @@
                         <br/>
 
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" id="email" name="email" value="${email}" required>
                         <span class="error">${errors.EmployeeWithThisEmailIsAlreadyExist}</span>
                         <span class="error">${errors.EmployeeEmailCannotBeNull}</span>
                         <span class="error">${errors.EmployeeEmailCannotBeEmpty}</span>
@@ -79,7 +79,7 @@
                         <br/>
 
                         <label for="salaryPerHour">Salary Per Hour</label>
-                        <input type="number" class="form-control" id="salaryPerHour" name="salaryPerHour" value="0" required>
+                        <input type="number" class="form-control" id="salaryPerHour" name="salaryPerHour" value="${salaryPerHour}" required>
                         <span class="error">${errors.EmployeeSalaryPerHourCannotBeNull}</span>
                         <span class="error">${errors.EmployeeSalaryPerHourCannotBeLessThen1}</span>
                         <span class="error">${errors.EmployeeSalaryPerHourCannotBeMoreThen99999}</span>
@@ -87,7 +87,7 @@
                         <br/>
 
                         <label for="dateOfBirth">Date Of Birth</label>
-                        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+                        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" value="${dateOfBirth}" required>
                         <span class="error">${errors.EmployeeDateOfBirthCannotBeNull}</span>
                         <span class="error">${errors.EmployeeDateOfBirthCanBeOnlyInPast}</span>
 
@@ -98,7 +98,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Add</button>
+                            <button type="submit" class="btn btn-default">Edit</button>
                         </div>
                     </div>
                 </div>

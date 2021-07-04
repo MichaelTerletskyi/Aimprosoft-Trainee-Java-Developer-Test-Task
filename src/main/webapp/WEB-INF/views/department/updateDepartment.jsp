@@ -24,7 +24,7 @@
         <ul class="navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" href="${pageContext.request.contextPath}/departments" style="color:black; font-size: 30px">
-                    RETURN TO DEPARTMENTS
+                    Return to departments
                 </a>
             </li>
         </ul>

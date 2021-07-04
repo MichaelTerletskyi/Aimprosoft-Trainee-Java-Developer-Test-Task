@@ -35,7 +35,6 @@ public abstract class Validator<T> {
 
     private T validate(T model) {
         Set<ConstraintViolation<T>> violations = validator.validate(model);
-
         violations.forEach(v -> errorsMap.put(getCamelCaseErrorTitle(v.getMessage()), v.getMessage()));
         if (existByUniqueField(model)) {
             errorsMap.put(getCamelCaseErrorTitle(uniqueFieldError()), uniqueFieldError());
