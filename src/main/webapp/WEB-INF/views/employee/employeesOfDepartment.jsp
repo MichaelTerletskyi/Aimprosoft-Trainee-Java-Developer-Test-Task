@@ -71,7 +71,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/employee/update?id=<c:out value='${employee.getId()}'/>">
+                            <a href="${pageContext.request.contextPath}/employee/details?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-warning">Details</button>
                             </a>
                         </td>
