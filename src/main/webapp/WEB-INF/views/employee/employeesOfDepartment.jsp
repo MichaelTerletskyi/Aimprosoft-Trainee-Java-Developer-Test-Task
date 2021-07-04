@@ -53,7 +53,6 @@
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
-                    <th>Head</th>
                     <th>Actions</th>
                     <th></th>
                     <th></th>
@@ -64,14 +63,13 @@
                         <td><c:out value="${employee.getFirstName()}"/></td>
                         <td><c:out value="${employee.getLastName()}"/></td>
                         <td><c:out value="${employee.getEmail()}"/></td>
-                        <td><c:out value="${employee.isHead()}"/></td>
                         <td>
                             <a href="${pageContext.request.contextPath}/departments/employees/promote/to/head?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-success">Promote to Head</button>
                             </a>
                         </td>
                         <td>
-                            <a href="${pageContext.request.contextPath}/employee/details?id=<c:out value='${employee.getId()}'/>">
+                            <a href="${pageContext.request.contextPath}/departments/employees/details?id=<c:out value='${employee.getId()}'/>">
                                 <button type="button" class="btn btn-outline-warning">Details</button>
                             </a>
                         </td>

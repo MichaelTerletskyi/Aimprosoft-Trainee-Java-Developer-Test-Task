@@ -182,6 +182,18 @@ public class Employee implements Serializable {
         return (int) ChronoUnit.YEARS.between(getDateOfBirth(), LocalDate.now());
     }
 
+    public String getHead() {
+        return isHead() ? "Head" : "No Head";
+    }
+
+    public BigDecimal getSalaryPerYear() {
+        return getSalaryPerHour()
+                .multiply(BigDecimal.valueOf(8))
+                .multiply(BigDecimal.valueOf(5))
+                .multiply(BigDecimal.valueOf(4))
+                .multiply(BigDecimal.valueOf(12));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
