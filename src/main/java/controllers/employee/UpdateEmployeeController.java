@@ -30,15 +30,18 @@ public class UpdateEmployeeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Employee employee = employeeService.getById(Long.parseLong(req.getParameter("id")));
-        Department department = departmentService.getById(EmployeesOfDepartmentController.DEPARTMENT_ID);
+        Employee employee = employeeService.getById(employeeService.getEmpId(req.getQueryString()));
+        Department department = departmentService.getById(departmentService.getDepId(req.getQueryString()));
+
         req.setAttribute("departmentId", department.getId());
         req.setAttribute("departmentTitle", department.getTitle());
+        req.setAttribute("employeeId", employee.getId());
         req.setAttribute("firstName", employee.getFirstName());
         req.setAttribute("lastName", employee.getLastName());
         req.setAttribute("email", employee.getEmail());
         req.setAttribute("salaryPerHour", employee.getSalaryPerHour());
         req.setAttribute("dateOfBirth", employee.getDateOfBirth());
+        req.setAttribute("head", employee.isHead());
         req.getRequestDispatcher(pathUrl).forward(req, resp);
     }
 
@@ -53,7 +56,8 @@ public class UpdateEmployeeController extends HttpServlet {
             req.setAttribute("errors", errors);
             req.getRequestDispatcher(pathUrl).forward(req, resp);
         }
-        resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" + EmployeesOfDepartmentController.DEPARTMENT_ID);
+        resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" +
+                departmentService.getDepId(req.getQueryString()));
     }
 
     @Override

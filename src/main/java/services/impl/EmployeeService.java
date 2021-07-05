@@ -9,6 +9,7 @@ import java.util.Set;
 
 /**
  * @Create 6/29/2021
+ * @Extends of {@link AbstractService} class.
  */
 
 public class EmployeeService extends AbstractService<Employee> implements IEmployee {
@@ -40,5 +41,9 @@ public class EmployeeService extends AbstractService<Employee> implements IEmplo
     @Override
     public Long getIdByEmail(String email) {
         return jdbcRepository().getIdByEmail(email);
+    }
+
+    public long getEmpId(String queryString) {
+        return extractIds(queryString).get(1);
     }
 }

@@ -31,25 +31,19 @@ public class PromoteEmployeeToHeadController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
+        Long departmentId = departmentService.getDepId(req.getQueryString());
+
         try {
-            Employee previousHead = departmentService
-                    .getById(EmployeesOfDepartmentController.DEPARTMENT_ID, true).getHead();
+            Employee previousHead = departmentService.getById(departmentId, true).getHead();
             if (!Objects.isNull(previousHead)) {
                 previousHead.setHead(false);
                 employeeService.update(previousHead);
             }
-        } catch (HeadOfDepartmentNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            Employee newHead = employeeService.getById(id);
+            Employee newHead = employeeService.getById(employeeService.getEmpId(req.getQueryString()));
             newHead.setHead(true);
             employeeService.update(newHead);
-            resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" +
-                    EmployeesOfDepartmentController.DEPARTMENT_ID);
-        } catch (EntityNotFoundException e) {
+            resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" + departmentId);
+        } catch (HeadOfDepartmentNotFoundException | EntityNotFoundException e) {
             e.printStackTrace();
         }
     }

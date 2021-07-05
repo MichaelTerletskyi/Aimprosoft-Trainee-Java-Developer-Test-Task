@@ -38,7 +38,7 @@
 
             <div class="col-md-3">
                 <div class="contact-info">
-                    <img src="https://i.dlpng.com/static/png/6844306_preview.png"
+                    <img src="https://image.flaticon.com/icons/png/512/4557/4557743.png"
                          alt="image" width="300"/>
                     <h2>Create</h2>
                     <h4>Employee</h4>

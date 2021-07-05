@@ -10,6 +10,7 @@ import java.util.Set;
 
 /**
  * @Create 6/29/2021
+ * @Extends of {@link AbstractService} class.
  */
 
 public class DepartmentService extends AbstractService<Department> implements IDepartment {
@@ -79,5 +80,13 @@ public class DepartmentService extends AbstractService<Department> implements ID
 
     public void addEmployee(Long departmentId, Set<Employee> employees) {
         employees.forEach(employee -> jdbcRepository().addEmployee(departmentId, employee.getId()));
+    }
+
+    public long extractId(String queryString) {
+        return Long.parseLong(queryString.replaceAll("[^0-9]", ""));
+    }
+
+    public long getDepId(String queryString) {
+        return extractIds(queryString).get(0);
     }
 }

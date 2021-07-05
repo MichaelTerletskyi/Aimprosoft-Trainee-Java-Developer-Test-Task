@@ -1,7 +1,10 @@
 package services;
 
 import repositories.jdbc.AbstractJDBCRepository;
+import javax.servlet.http.HttpServletRequest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,5 +36,21 @@ public abstract class AbstractService<T> {
 
     public boolean existById(Long id) {
         return jdbcRepository().existById(id);
+    }
+
+    /**
+     * This method parse getQueryString() to id's departments and employees
+     * @View more info {@link HttpServletRequest}
+     */
+
+    protected List<Long> extractIds(String queryString) {
+        String[] split = queryString.replaceAll("[^0-9]", " ").split(" ");
+        List<Long> arr = new ArrayList<>();
+        for (String s : split) {
+            if (!s.isEmpty()) {
+                arr.add(Long.parseLong(s));
+            }
+        }
+        return arr;
     }
 }

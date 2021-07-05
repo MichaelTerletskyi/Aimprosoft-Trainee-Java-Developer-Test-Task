@@ -1,5 +1,6 @@
 package controllers.employee;
 
+import services.impl.DepartmentService;
 import services.impl.EmployeeService;
 
 import javax.servlet.ServletConfig;
@@ -16,6 +17,7 @@ import java.io.IOException;
 
 @WebServlet(name = "DeleteEmployee", urlPatterns = "/departments/employees/delete")
 public class DeleteEmployeeController extends HttpServlet {
+    private final DepartmentService departmentService = new DepartmentService();
     private final EmployeeService employeeService = new EmployeeService();
 
     @Override
@@ -25,8 +27,9 @@ public class DeleteEmployeeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        employeeService.delete(Long.parseLong(req.getParameter("id")));
-        resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" + EmployeesOfDepartmentController.DEPARTMENT_ID);
+        employeeService.delete(employeeService.getEmpId(req.getQueryString()));
+        resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" +
+                departmentService.getDepId(req.getQueryString()));
     }
 
     @Override

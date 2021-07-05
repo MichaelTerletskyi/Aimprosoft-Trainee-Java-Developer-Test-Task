@@ -8,11 +8,14 @@ import validation.Validator;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Map;
 import java.util.Objects;
 
-import static validation.IEmployeeValidationMessages.EMPLOYEE_DATE_OF_BIRTH_NOT_NULL_ERROR_MESSAGE;
 import static validation.IEmployeeValidationMessages.EMPLOYEE_EMAIL_UNIQUE_ERROR_MESSAGE;
+
+/**
+ * @Create 7/01/2021
+ * @Extends of {@link Validator} class.
+ */
 
 public class EmployeeValidator extends Validator<Employee> {
 
@@ -46,22 +49,15 @@ public class EmployeeValidator extends Validator<Employee> {
     }
 
     @Override
-    protected Employee getPrimalModel(HttpServletRequest req, Map<String, String> errorsMap) {
+    protected Employee getPrimalModel(HttpServletRequest req) {
         Employee employee = new Employee(req.getParameter("firstName"), req.getParameter("lastName"),
                 req.getParameter("email"), BigDecimal.valueOf(Long.parseLong(req.getParameter("salaryPerHour"))),
-                null, false);
-        if (!errorsMap.containsValue(EMPLOYEE_DATE_OF_BIRTH_NOT_NULL_ERROR_MESSAGE))
-            employee.setDateOfBirth(LocalDate.parse(req.getParameter("dateOfBirth")));
-        if (!Objects.isNull(req.getParameter("id")))
-            employee.setId(Long.parseLong(req.getParameter("id")));
-        return employee;
-    }
+                null, Boolean.parseBoolean(req.getParameter("head")));
 
-    @Override
-    protected void additionalLocalCheck(HttpServletRequest req, Map<String, String> errorsMap) {
-        if (req.getParameter("dateOfBirth").isEmpty()) {
-            String errMsg = EMPLOYEE_DATE_OF_BIRTH_NOT_NULL_ERROR_MESSAGE;
-            errorsMap.put(getCamelCaseErrorTitle(errMsg), errMsg);
-        }
+        if (!Objects.isNull(req.getParameter("employeeId")))
+            employee.setId(Long.parseLong(req.getParameter("employeeId")));
+        if (!req.getParameter("dateOfBirth").isEmpty())
+            employee.setDateOfBirth(LocalDate.parse(req.getParameter("dateOfBirth")));
+        return employee;
     }
 }

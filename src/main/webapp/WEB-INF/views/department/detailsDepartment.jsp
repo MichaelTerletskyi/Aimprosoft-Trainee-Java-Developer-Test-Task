@@ -100,7 +100,7 @@
 
                             <br>
 
-                            <h2>Total salary</h2>
+                            <h2>Total salary per hour</h2>
                             <h1 style="color: black">${totalSalary} $</h1>
                         </div>
                     </div>

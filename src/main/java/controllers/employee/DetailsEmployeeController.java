@@ -30,11 +30,11 @@ public class DetailsEmployeeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Department department = departmentService.getById(EmployeesOfDepartmentController.DEPARTMENT_ID);
+        Department department = departmentService.getById(departmentService.getDepId(req.getQueryString()));
         req.setAttribute("departmentId", department.getId());
         req.setAttribute("departmentTitle", department.getTitle());
 
-        Employee employee = employeeService.getById(Long.parseLong(req.getParameter("id")));
+        Employee employee = employeeService.getById(employeeService.getEmpId(req.getQueryString()));
         req.setAttribute("id", employee.getId());
         req.setAttribute("firstName", employee.getFirstName());
         req.setAttribute("lastName", employee.getLastName());

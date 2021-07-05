@@ -18,22 +18,20 @@ import java.util.Set;
 public abstract class Validator<T> {
     private ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     private javax.validation.Validator validator = validatorFactory.getValidator();
-    private Map<String, String> errorsMap = new HashMap<>();
 
     protected abstract AbstractService<T> service();
     protected abstract String uniqueFieldError();
     protected abstract boolean existByUniqueField(T t);
     protected abstract String validationFailedMessage();
-    protected abstract T getPrimalModel(HttpServletRequest req, Map<String, String> errorsMap);
-    protected abstract void additionalLocalCheck(HttpServletRequest req, Map<String, String> errorsMap);
+    protected abstract T getPrimalModel(HttpServletRequest req);
 
     public T buildModel(HttpServletRequest req) {
-        additionalLocalCheck(req, errorsMap);
-        T model = getPrimalModel(req, errorsMap);
+        T model = getPrimalModel(req);
         return validate(model);
     }
 
     private T validate(T model) {
+        Map<String, String> errorsMap = new HashMap<>();
         Set<ConstraintViolation<T>> violations = validator.validate(model);
         violations.forEach(v -> errorsMap.put(getCamelCaseErrorTitle(v.getMessage()), v.getMessage()));
         if (existByUniqueField(model)) {
@@ -44,7 +42,7 @@ public abstract class Validator<T> {
         return model;
     }
 
-    protected String getCamelCaseErrorTitle(String s) {
+    private String getCamelCaseErrorTitle(String s) {
         String[] strings = s.strip().split(" ");
 
         StringBuilder sb = new StringBuilder();

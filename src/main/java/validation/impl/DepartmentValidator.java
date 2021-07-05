@@ -6,7 +6,6 @@ import services.impl.DepartmentService;
 import validation.Validator;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 import java.util.Objects;
 
 import static validation.IDepartmentValidationErrorsMessages.DEPARTMENT_TITLE_UNIQUE_ERROR_MESSAGE;
@@ -48,14 +47,9 @@ public class DepartmentValidator extends Validator<Department> {
     }
 
     @Override
-    protected Department getPrimalModel(HttpServletRequest req, Map<String, String> errorsMap) {
+    protected Department getPrimalModel(HttpServletRequest req) {
         return Objects.isNull(req.getParameter("id"))
                 ? new Department(req.getParameter("title"), req.getParameter("description"))
                 : new Department(Long.parseLong(req.getParameter("id")), req.getParameter("title"), req.getParameter("description"));
-    }
-
-    @Override
-    protected void additionalLocalCheck(HttpServletRequest req, Map<String, String> errorsMap) {
-
     }
 }

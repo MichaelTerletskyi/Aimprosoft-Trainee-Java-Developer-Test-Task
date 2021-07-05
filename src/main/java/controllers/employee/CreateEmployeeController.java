@@ -27,7 +27,6 @@ public class CreateEmployeeController extends HttpServlet {
     private final EmployeeService employeeService = new EmployeeService();
     private final EmployeeValidator employeeValidator = new EmployeeValidator();
     private final String pathUrl = "/WEB-INF/views/employee/createEmployee.jsp";
-    private Boolean validationFailed = false;
 
     @Override
     public void init(ServletConfig config) {
@@ -36,7 +35,7 @@ public class CreateEmployeeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Department department = departmentService.getById(EmployeesOfDepartmentController.DEPARTMENT_ID);
+        Department department = departmentService.getById(departmentService.extractId(req.getQueryString()));
         req.setAttribute("departmentId", department.getId());
         req.setAttribute("departmentTitle", department.getTitle());
         req.getRequestDispatcher(pathUrl).forward(req, resp);
@@ -44,6 +43,9 @@ public class CreateEmployeeController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        boolean validationFailed = false;
+        Long departmentId = departmentService.extractId(req.getQueryString());
+
         try {
             Employee employee = employeeValidator.buildModel(req);
             employeeService.create(employee);
@@ -56,9 +58,9 @@ public class CreateEmployeeController extends HttpServlet {
         }
 
         if (!validationFailed) {
-            departmentService.addEmployee(EmployeesOfDepartmentController.DEPARTMENT_ID, employeeService.getIdByEmail(req.getParameter("email")));
+            departmentService.addEmployee(departmentId, employeeService.getIdByEmail(req.getParameter("email")));
         }
-        resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" + EmployeesOfDepartmentController.DEPARTMENT_ID);
+        resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" + departmentId);
     }
 
     @Override

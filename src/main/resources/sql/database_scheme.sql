@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS EMPLOYEES
     first_name      VARCHAR(32)  NOT NULL,
     last_name       VARCHAR(32)  NOT NULL,
     email           VARCHAR(255) NOT NULL UNIQUE,
-    salary_per_hour DECIMAL(7, 1),
+    salary_per_hour DECIMAL(7),
     date_of_birth   DATE,
     head            TINYINT(1),
     department_id   BIGINT       NULL REFERENCES DEPARTMENTS (department_id)
@@ -35,5 +35,5 @@ VALUES ('Carl', 'Johnson', 'cj@gmail.com', 250000, '1968-05-03', 1, 1),
        ('Melvin', 'Harris', 'bigsmoke@yahoo.com', 100, '1967-10-29', 0, 1),
        ('Lance', 'Wilson', 'ryder@yahoo.com', 50, '1963-06-24', 0, 1),
 
-       ('Frank', 'Tenpenny', 'officertenpenny@gmail.com', 80.0, '1958-11-12', 1, 2),
-       ('Edward', 'Pulaski', 'officerpulaski@gmail.com', 80.0, '1956-02-27', 0, 2);
+       ('Frank', 'Tenpenny', 'officertenpenny@gmail.com', 80, '1958-11-12', 1, 2),
+       ('Edward', 'Pulaski', 'officerpulaski@gmail.com', 80, '1956-02-27', 0, 2);
