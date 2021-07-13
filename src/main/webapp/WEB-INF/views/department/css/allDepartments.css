@@ -1,0 +1,37 @@
+body {
+    background: url("https://cdn.cnn.com/cnnnext/dam/assets/171218204904-bank-of-china-tower-full-169.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+h6 {
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    color: black;
+}
+
+td {
+    font-family: "Quicksand", sans-serif;
+    font-size: 15px;
+    color: black;
+}
+
+th {
+    font-family: "Quicksand", sans-serif;
+    font-size: 15px;
+    color: black;
+}
+
+a {
+    font-family: "Quicksand", sans-serif;
+    font-size: 15px;
+    color: black;
+}
+
+tr {
+    font-family: "Quicksand", sans-serif;
+    font-size: 15px;
+    color: black;
+}

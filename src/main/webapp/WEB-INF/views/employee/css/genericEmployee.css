@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
+.contact {
+    padding: 4%;
+    height: 400px;
+}
+
+.contact-info {
+    margin-top: 10%;
+}
+
+.contact-info img {
+    margin-bottom: 15%;
+}
+
+.contact-info h2 {
+    margin-bottom: 10%;
+}
+
+.col-md-9 {
+    background: #fff;
+    padding: 3%;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.contact-form label {
+    font-weight: 600;
+}
+
+.contact-form button {
+    background: black;
+    color: #fff;
+    font-weight: 600;
+    width: 25%;
+}
+
+th {
+    font-size: 15px;
+    font-family: "Quicksand", sans-serif;
+    padding: 10px 15px;
+    text-align: left;
+    text-transform: unset;
+}
+
+td {
+    font-family: "Quicksand", sans-serif;
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 10px;
+    color: #fff;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+br {
+    text-align: center;
+}
+
+input {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    color: black;
+}
+
+form {
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+.field {
+    clear: both;
+    text-align: right;
+}
+
+label {
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    color: black;
+    float: left;
+}
+
+h1 {
+    font-family: "Quicksand", sans-serif;
+}
+
+span {
+    font-family: "Quicksand", sans-serif;
+    color: red;
+}
+
+a {
+    font-family: "Quicksand", sans-serif;
+}

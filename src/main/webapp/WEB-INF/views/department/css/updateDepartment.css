@@ -1,0 +1,14 @@
+body {
+    background: url("https://images.wallpaperscraft.com/image/interior_design_style_design_metropolis_space_studio_76951_1920x1080.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.col-md-3 {
+    background: goldenrod;;
+    padding: 4%;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}

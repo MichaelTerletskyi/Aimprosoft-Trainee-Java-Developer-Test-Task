@@ -1,0 +1,14 @@
+body {
+    background: url("https://www.stockholmsustainablefinance.com/wp-content/uploads/2018/09/photo-1486406146926-c627a92ad1ab.jpeg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.col-md-3 {
+    background: deepskyblue;
+    padding: 4%;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
