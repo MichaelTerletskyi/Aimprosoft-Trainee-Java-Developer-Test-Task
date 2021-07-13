@@ -1,4 +1,4 @@
-# Trainee Java Developer test task for Aimprosoft company
+# Trainee Full Stack-Developer test task for Aimprosoft company
 
 Description
 

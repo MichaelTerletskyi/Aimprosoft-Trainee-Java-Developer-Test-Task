@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Aimprosoft - Trainee Java Developer test task Maven Webapp</name>
+    <name>Aimprosoft - Trainee Full-Stack Developer test task Maven Webapp</name>
     <url>https://www.aimprosoft.com</url>
 
     <properties>
@@ -85,7 +85,7 @@
     </dependencies>
 
     <build>
-        <finalName>Aimprosoft - Trainee Java Developer test task</finalName>
+        <finalName>Aimprosoft - Trainee Full-Stack Developer test task</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>

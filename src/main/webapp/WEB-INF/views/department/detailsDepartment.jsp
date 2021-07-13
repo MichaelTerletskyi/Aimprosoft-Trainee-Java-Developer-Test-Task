@@ -39,7 +39,7 @@
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
             <div class="about-section">
-                <h1>Details of ${title}</h1>
+                <h1 style="color: white">Details of ${title}</h1>
                 <h2 style="color: white;">${description}.</h2>
             </div>
 
