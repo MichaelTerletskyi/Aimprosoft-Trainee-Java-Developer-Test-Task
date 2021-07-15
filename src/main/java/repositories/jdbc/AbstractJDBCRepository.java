@@ -12,7 +12,7 @@ import java.util.Set;
  * @Create 6/27/2021
  */
 
-public abstract class AbstractJDBCRepository<T, K> {
+public abstract class AbstractJDBCRepository<T> {
 
     /**
      * ОСНОВНЫЕ ПОНЯТИЯ
@@ -63,10 +63,10 @@ public abstract class AbstractJDBCRepository<T, K> {
         return element;
     }
 
-    public T getById(K id) {
+    public T getById(Long id) {
         T t = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(getByIdQuery())) {
-            preparedStatement.setLong(1, (Long) id);
+            preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 t = resultSetExtract(resultSet);
@@ -100,19 +100,19 @@ public abstract class AbstractJDBCRepository<T, K> {
         return element;
     }
 
-    public void delete(K id) {
+    public void delete(Long id) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery())) {
-            preparedStatement.setLong(1, (Long) id);
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public boolean existById(K id) {
+    public boolean existById(Long id) {
         boolean exist = false;
         try (PreparedStatement preparedStatement = connection.prepareStatement(existByIdQuery())) {
-            preparedStatement.setLong(1, (Long) id);
+            preparedStatement.setLong(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) exist = rs.getInt(1) > 0;
         } catch (SQLException e) {

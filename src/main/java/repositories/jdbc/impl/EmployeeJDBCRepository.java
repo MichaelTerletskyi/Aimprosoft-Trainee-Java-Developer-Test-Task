@@ -2,19 +2,22 @@ package repositories.jdbc.impl;
 
 import exceptions.EntityNotFoundException;
 import models.Employee;
-import repositories.jdbc.AbstractJDBCRepository;
+import repositories.jdbc.AbstractEmployeeJDBCRepository;
 
-import java.sql.*;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 /**
  * @Create 6/27/2021
- * @Extends of {@link AbstractJDBCRepository} class.
+ * @Extends of {@link AbstractEmployeeJDBCRepository} class.
  */
 
-public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Long> {
+public class EmployeeJDBCRepository extends AbstractEmployeeJDBCRepository {
 
     @Override
     protected String createQuery() {
@@ -80,6 +83,7 @@ public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Lon
         return "Employee not found";
     }
 
+    @Override
     public Set<Employee> getAllByDepartmentId(Long id) {
         Set<Employee> employees = new HashSet<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM test_database.employees WHERE department_id = ?")) {
@@ -94,6 +98,7 @@ public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Lon
         return employees;
     }
 
+    @Override
     public Employee getByEmail(String email) {
         Employee employee = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT employee_id, first_name, last_name, email, salary_per_hour, date_of_birth, head FROM test_database.employees WHERE email = ?")) {
@@ -108,6 +113,7 @@ public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Lon
         return Optional.ofNullable(employee).orElseThrow(() -> new EntityNotFoundException("Employee with this email has not been found"));
     }
 
+    @Override
     public boolean existByEmail(String email) {
         boolean isEmailExist = false;
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM test_database.employees WHERE email = ?")) {
@@ -122,6 +128,7 @@ public class EmployeeJDBCRepository extends AbstractJDBCRepository<Employee, Lon
         return isEmailExist;
     }
 
+    @Override
     public Long getIdByEmail(String email) {
         Long employeeId = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT employee_id FROM test_database.employees WHERE email = ?")) {

@@ -1,5 +1,6 @@
 package services.impl;
 
+import enums.EmployeeFetchType;
 import models.Department;
 import models.Employee;
 import repositories.jdbc.impl.DepartmentJDBCRepository;
@@ -19,20 +20,20 @@ public class DepartmentService extends AbstractService<Department> {
         return new DepartmentJDBCRepository();
     }
 
-    public Department getById(Long id, boolean fetchEmployees) {
-        return jdbcRepository().getById(id, fetchEmployees);
+    public Department getById(Long id, EmployeeFetchType employeeFetchType) {
+        return jdbcRepository().getById(id, employeeFetchType);
     }
 
-    public Set<Department> getAll(boolean fetchEmployees) {
-        return jdbcRepository().getAll(fetchEmployees);
+    public Set<Department> getAll(EmployeeFetchType employeeFetchType) {
+        return jdbcRepository().getAll(employeeFetchType);
     }
 
     public Department getByTitle(String title) {
         return jdbcRepository().getByTitle(title);
     }
 
-    public Department getByTitle(String title, boolean fetchEmployees) {
-        return jdbcRepository().getByTitle(title, fetchEmployees);
+    public Department getByTitle(String title, EmployeeFetchType employeeFetchType) {
+        return jdbcRepository().getByTitle(title, employeeFetchType);
     }
 
     public boolean existByTitle(String title) {

@@ -2,4 +2,4 @@
 
 Description
 
-![alt text](screens/TestTaskDescription.jpg)
+![alt text](src/main/resources/screens/TestTaskDescription.jpg)

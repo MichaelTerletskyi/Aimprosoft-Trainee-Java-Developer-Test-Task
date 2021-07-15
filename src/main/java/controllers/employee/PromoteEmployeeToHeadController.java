@@ -1,5 +1,6 @@
 package controllers.employee;
 
+import enums.EmployeeFetchType;
 import exceptions.EntityNotFoundException;
 import exceptions.HeadOfDepartmentNotFoundException;
 import models.Employee;
@@ -34,7 +35,7 @@ public class PromoteEmployeeToHeadController extends HttpServlet {
         Long departmentId = departmentService.getDepId(req.getQueryString());
 
         try {
-            Employee previousHead = departmentService.getById(departmentId, true).getHead();
+            Employee previousHead = departmentService.getById(departmentId, EmployeeFetchType.EAGER).getHead();
             if (!Objects.isNull(previousHead)) {
                 previousHead.setHead(false);
                 employeeService.update(previousHead);
