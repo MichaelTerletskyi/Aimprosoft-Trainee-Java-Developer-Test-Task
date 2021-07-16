@@ -1,6 +1,5 @@
 package controllers.department;
 
-import exceptions.ValidationException;
 import models.Department;
 import services.impl.DepartmentService;
 import validation.impl.DepartmentValidator;
@@ -22,7 +21,7 @@ import java.io.IOException;
 public class CreateDepartmentController extends HttpServlet {
     private final DepartmentValidator departmentValidator = new DepartmentValidator();
     private final DepartmentService departmentService = new DepartmentService();
-    private final String pathUrl = "/WEB-INF/views/department/createDepartment.jsp";
+    private final static String pathUrl = "/WEB-INF/views/department/createDepartment.jsp";
 
     @Override
     public void init(ServletConfig config) {
@@ -35,15 +34,9 @@ public class CreateDepartmentController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        try {
-            Department department = departmentValidator.buildModel(req);
-            departmentService.create(department);
-        } catch (ValidationException e) {
-            e.printStackTrace();
-            req.setAttribute("errors", e.getErrors());
-            req.getRequestDispatcher(pathUrl).forward(req, resp);
-        }
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Department department = departmentValidator.buildModel(req);
+        departmentService.create(department);
         resp.sendRedirect(req.getContextPath() + "/departments");
     }
 

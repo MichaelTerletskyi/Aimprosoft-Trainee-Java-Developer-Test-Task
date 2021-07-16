@@ -11,4 +11,32 @@
          version="3.1">
     <display-name>Archetype Created Web Application</display-name>
 
+
+    <filter>
+        <filter-name>DepartmentFilter</filter-name>
+        <filter-class>filters.DepartmentFilter</filter-class>
+        <init-param>
+            <param-name>active</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>DepartmentFilter</filter-name>
+        <servlet-name>AddDepartment</servlet-name>
+        <servlet-name>UpdateDepartment</servlet-name>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>EmployeeFilter</filter-name>
+        <filter-class>filters.EmployeeFilter</filter-class>
+        <init-param>
+            <param-name>active</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EmployeeFilter</filter-name>
+        <servlet-name>AddEmployee</servlet-name>
+        <servlet-name>EditEmployee</servlet-name>
+    </filter-mapping>
 </web-app>

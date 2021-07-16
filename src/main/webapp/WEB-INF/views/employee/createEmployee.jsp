@@ -52,7 +52,7 @@
                         <br/>
 
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName" required>
+                        <input type="text" class="form-control" id="firstName" name="firstName" value="${firstName}" required>
                         <span class="error">${errors.EmployeeFirstNameCannotBeNull}</span>
                         <span class="error">${errors.EmployeeFirstNameCannotBeEmpty}</span>
                         <span class="error">${errors.EmployeeFirstNameCanContainsFrom1To32Letters}</span>
@@ -61,7 +61,7 @@
                         <br/>
 
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" name="lastName" required>
+                        <input type="text" class="form-control" id="lastName" name="lastName" value="${lastName}" required>
                         <span class="error">${errors.EmployeeLastNameCannotBeNull}</span>
                         <span class="error">${errors.EmployeeLastNameCannotBeEmpty}</span>
                         <span class="error">${errors.EmployeeLastNameCanContainsFrom1To32Letters}</span>
@@ -70,7 +70,7 @@
                         <br/>
 
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control" id="email" name="email" value="${email}" required>
                         <span class="error">${errors.EmployeeWithThisEmailIsAlreadyExist}</span>
                         <span class="error">${errors.EmployeeEmailCannotBeNull}</span>
                         <span class="error">${errors.EmployeeEmailCannotBeEmpty}</span>
@@ -79,7 +79,7 @@
                         <br/>
 
                         <label for="salaryPerHour">Salary Per Hour</label>
-                        <input type="number" class="form-control" id="salaryPerHour" name="salaryPerHour" value="0" required>
+                        <input type="number" class="form-control" id="salaryPerHour" name="salaryPerHour" value="${salaryPerHour}" required>
                         <span class="error">${errors.EmployeeSalaryPerHourCannotBeNull}</span>
                         <span class="error">${errors.EmployeeSalaryPerHourCannotBeLessThen1}</span>
                         <span class="error">${errors.EmployeeSalaryPerHourCannotBeMoreThen99999}</span>
@@ -87,7 +87,7 @@
                         <br/>
 
                         <label for="dateOfBirth">Date Of Birth</label>
-                        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+                        <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" value="${dateOfBirth}" required>
                         <span class="error">${errors.EmployeeDateOfBirthCannotBeNull}</span>
                         <span class="error">${errors.EmployeeDateOfBirthCanBeOnlyInPast}</span>
 

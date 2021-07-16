@@ -1,6 +1,5 @@
 package controllers.employee;
 
-import exceptions.ValidationException;
 import models.Department;
 import models.Employee;
 import services.impl.DepartmentService;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * @Create 7/03/2021
@@ -26,7 +24,7 @@ public class CreateEmployeeController extends HttpServlet {
     private final DepartmentService departmentService = new DepartmentService();
     private final EmployeeService employeeService = new EmployeeService();
     private final EmployeeValidator employeeValidator = new EmployeeValidator();
-    private final String pathUrl = "/WEB-INF/views/employee/createEmployee.jsp";
+    private final static String pathUrl = "/WEB-INF/views/employee/createEmployee.jsp";
 
     @Override
     public void init(ServletConfig config) {
@@ -42,24 +40,11 @@ public class CreateEmployeeController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        boolean validationFailed = false;
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Long departmentId = departmentService.extractId(req.getQueryString());
-
-        try {
-            Employee employee = employeeValidator.buildModel(req);
-            employeeService.create(employee);
-        } catch (ValidationException e) {
-            Map<String, String> errors = e.getErrors();
-            validationFailed = !errors.isEmpty();
-            e.printStackTrace();
-            req.setAttribute("errors", errors);
-            req.getRequestDispatcher(pathUrl).forward(req, resp);
-        }
-
-        if (!validationFailed) {
-            departmentService.addEmployee(departmentId, employeeService.getIdByEmail(req.getParameter("email")));
-        }
+        Employee employee = employeeValidator.buildModel(req);
+        employeeService.create(employee);
+        departmentService.addEmployee(departmentId, employeeService.getIdByEmail(employee.getEmail()));
         resp.sendRedirect(req.getContextPath() + "/departments/employees?id=" + departmentId);
     }
 

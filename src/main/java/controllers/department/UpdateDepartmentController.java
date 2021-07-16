@@ -1,6 +1,5 @@
 package controllers.department;
 
-import exceptions.ValidationException;
 import models.Department;
 import services.impl.DepartmentService;
 import validation.impl.DepartmentValidator;
@@ -22,7 +21,7 @@ import java.io.IOException;
 public class UpdateDepartmentController extends HttpServlet {
     private final DepartmentService departmentService = new DepartmentService();
     private final DepartmentValidator departmentValidator = new DepartmentValidator();
-    private final String pathUrl = "/WEB-INF/views/department/updateDepartment.jsp";
+    private final static String pathUrl = "/WEB-INF/views/department/updateDepartment.jsp";
 
     @Override
     public void init(ServletConfig config) {
@@ -31,22 +30,14 @@ public class UpdateDepartmentController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Department department = departmentService.getById(Long.parseLong(req.getParameter("id")));
-        req.setAttribute("title", department.getTitle());
-        req.setAttribute("description", department.getDescription());
+        departmentService.attributesSetsWithId(req);
         req.getRequestDispatcher(pathUrl).forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            Department department = departmentValidator.buildModel(req);
-            departmentService.update(department);
-        } catch (ValidationException e) {
-            e.printStackTrace();
-            req.setAttribute("errors", e.getErrors());
-            req.getRequestDispatcher(pathUrl).forward(req, resp);
-        }
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Department department = departmentValidator.buildModel(req);
+        departmentService.update(department);
         resp.sendRedirect(req.getContextPath() + "/departments");
     }
 
