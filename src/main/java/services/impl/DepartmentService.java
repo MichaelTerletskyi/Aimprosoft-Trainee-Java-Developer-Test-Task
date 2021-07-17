@@ -1,10 +1,12 @@
 package services.impl;
 
+import enums.EmployeeFetchType;
 import models.Department;
 import models.Employee;
 import repositories.jdbc.impl.DepartmentJDBCRepository;
 import services.AbstractService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
 
 /**
@@ -19,20 +21,20 @@ public class DepartmentService extends AbstractService<Department> {
         return new DepartmentJDBCRepository();
     }
 
-    public Department getById(Long id, boolean fetchEmployees) {
-        return jdbcRepository().getById(id, fetchEmployees);
+    public Department getById(Long id, EmployeeFetchType employeeFetchType) {
+        return jdbcRepository().getById(id, employeeFetchType);
     }
 
-    public Set<Department> getAll(boolean fetchEmployees) {
-        return jdbcRepository().getAll(fetchEmployees);
+    public Set<Department> getAll(EmployeeFetchType employeeFetchType) {
+        return jdbcRepository().getAll(employeeFetchType);
     }
 
     public Department getByTitle(String title) {
         return jdbcRepository().getByTitle(title);
     }
 
-    public Department getByTitle(String title, boolean fetchEmployees) {
-        return jdbcRepository().getByTitle(title, fetchEmployees);
+    public Department getByTitle(String title, EmployeeFetchType employeeFetchType) {
+        return jdbcRepository().getByTitle(title, employeeFetchType);
     }
 
     public boolean existByTitle(String title) {
@@ -73,5 +75,16 @@ public class DepartmentService extends AbstractService<Department> {
 
     public long getDepId(String queryString) {
         return extractIds(queryString).get(0);
+    }
+
+    public void attributesSets(HttpServletRequest req) {
+        req.setAttribute("title", req.getParameter("title"));
+        req.setAttribute("description", req.getParameter("description"));
+    }
+
+    public void attributesSetsWithId(HttpServletRequest req) {
+        Department department = getById(Long.parseLong(req.getParameter("id")));
+        req.setAttribute("title", department.getTitle());
+        req.setAttribute("description", department.getDescription());
     }
 }

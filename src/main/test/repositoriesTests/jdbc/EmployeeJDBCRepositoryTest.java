@@ -1,5 +1,6 @@
 package repositoriesTests.jdbc;
 
+import enums.EmployeeFetchType;
 import models.Department;
 import models.Employee;
 import org.junit.jupiter.api.Assertions;
@@ -91,10 +92,10 @@ class EmployeeJDBCRepositoryTest {
         Department departmentWithoutIncludeEmployees = departmentJDBCRepository.getByTitle("Fetched Department");
         Assertions.assertNull(departmentWithoutIncludeEmployees.getEmployees());
 
-        Department departmentWithFalseIncludeEmployees = departmentJDBCRepository.getByTitle("Fetched Department", false);
+        Department departmentWithFalseIncludeEmployees = departmentJDBCRepository.getByTitle("Fetched Department", EmployeeFetchType.EAGER);
         Assertions.assertNull(departmentWithFalseIncludeEmployees.getEmployees());
 
-        Department departmentWithTrueIncludeEmployees = departmentJDBCRepository.getByTitle("Fetched Department", true);
+        Department departmentWithTrueIncludeEmployees = departmentJDBCRepository.getByTitle("Fetched Department", EmployeeFetchType.EAGER);
         Assertions.assertNotNull(departmentWithTrueIncludeEmployees.getEmployees());
         Assertions.assertEquals(2, departmentWithTrueIncludeEmployees.getEmployees().size());
     }

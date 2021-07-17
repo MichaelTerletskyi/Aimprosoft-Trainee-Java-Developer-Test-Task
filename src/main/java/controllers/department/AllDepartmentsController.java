@@ -1,5 +1,6 @@
 package controllers.department;
 
+import enums.EmployeeFetchType;
 import services.impl.DepartmentService;
 
 import javax.servlet.ServletConfig;
@@ -26,7 +27,7 @@ public class AllDepartmentsController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("departments", departmentService.getAll(true));
+        req.setAttribute("departments", departmentService.getAll(EmployeeFetchType.EAGER));
         req.getRequestDispatcher("/WEB-INF/views/department/allDepartments.jsp").forward(req, resp);
     }
 

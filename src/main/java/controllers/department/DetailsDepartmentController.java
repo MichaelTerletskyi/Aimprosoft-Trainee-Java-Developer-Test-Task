@@ -1,5 +1,6 @@
 package controllers.department;
 
+import enums.EmployeeFetchType;
 import models.Department;
 import services.impl.DepartmentService;
 
@@ -27,7 +28,7 @@ public class DetailsDepartmentController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Department department = departmentService.getById(Long.parseLong(req.getParameter("id")), true);
+        Department department = departmentService.getById(Long.parseLong(req.getParameter("id")), EmployeeFetchType.EAGER);
         req.setAttribute("id", department.getId());
         req.setAttribute("title", department.getTitle());
         req.setAttribute("description", department.getDescription());

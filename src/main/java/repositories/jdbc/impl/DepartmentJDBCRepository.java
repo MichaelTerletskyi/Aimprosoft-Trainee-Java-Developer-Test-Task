@@ -1,8 +1,9 @@
 package repositories.jdbc.impl;
 
+import enums.EmployeeFetchType;
 import exceptions.EntityNotFoundException;
 import models.Department;
-import repositories.jdbc.AbstractJDBCRepository;
+import repositories.jdbc.AbstractDepartmentJDBCRepository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,10 +14,11 @@ import java.util.Set;
 
 /**
  * @Create 6/27/2021
- * @Extends of {@link AbstractJDBCRepository} class.
+ * @Extends of {@link AbstractDepartmentJDBCRepository} class.
  */
 
-public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department, Long> {
+public class DepartmentJDBCRepository extends AbstractDepartmentJDBCRepository {
+    private final EmployeeJDBCRepository employeeJDBCRepository = new EmployeeJDBCRepository();
 
     @Override
     protected String createQuery() {
@@ -74,22 +76,41 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
         return "Department not found";
     }
 
-    private EmployeeJDBCRepository employeeJDBCRepository = new EmployeeJDBCRepository();
-
-    public Department getById(Long id, boolean fetchEmployees) {
-        if (!fetchEmployees) return super.getById(id);
+    @Override
+    public Department getById(Long id, EmployeeFetchType employeeFetchType) {
         Department department = super.getById(id);
-        department.setEmployees(employeeJDBCRepository.getAllByDepartmentId(id));
+        if (employeeFetchType.equals(EmployeeFetchType.LAZY)) return department;
+        if (employeeFetchType.equals(EmployeeFetchType.EAGER)) {
+            department.setEmployees(employeeJDBCRepository.getAllByDepartmentId(id));
+        }
         return department;
     }
 
-    public Set<Department> getAll(boolean fetchEmployees) {
-        if (!fetchEmployees) return super.getAll();
+    @Override
+    public Long getIdByTitle(String title) {
+        Long departmentId = null;
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT department_id FROM test_database.departments WHERE title = ?")) {
+            preparedStatement.setString(1, title);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) departmentId = rs.getLong("department_id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(departmentId).orElseThrow(()
+                -> new EntityNotFoundException(String.format("%s %s %s", "Department with title '", title, "' has not been found")));
+    }
+
+    @Override
+    public Set<Department> getAll(EmployeeFetchType employeeFetchType) {
         Set<Department> all = super.getAll();
-        all.forEach(department -> department.setEmployees(employeeJDBCRepository.getAllByDepartmentId(department.getId())));
+        if (employeeFetchType.equals(EmployeeFetchType.LAZY)) return all;
+        if (employeeFetchType.equals(EmployeeFetchType.EAGER)) {
+            all.forEach(department -> department.setEmployees(employeeJDBCRepository.getAllByDepartmentId(department.getId())));
+        }
         return all;
     }
 
+    @Override
     public Department getByTitle(String title) {
         Department department = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT department_id, title, description FROM test_database.departments WHERE title = ?")) {
@@ -104,10 +125,11 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
         return Optional.ofNullable(department).orElseThrow(() -> new EntityNotFoundException("Department with this title has not been found"));
     }
 
-    public Department getByTitle(String title, boolean fetchEmployees) {
+    @Override
+    public Department getByTitle(String title, EmployeeFetchType employeeFetchType) {
         Department department = getByTitle(title);
         if (!Objects.isNull(department)) {
-            if (fetchEmployees) {
+            if (employeeFetchType.equals(EmployeeFetchType.EAGER)) {
                 Long id = getIdByTitle(department.getTitle());
                 department.setEmployees(employeeJDBCRepository.getAllByDepartmentId(id));
             }
@@ -115,6 +137,7 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
         return Optional.ofNullable(department).orElseThrow(() -> new EntityNotFoundException("Department with this title has not been found"));
     }
 
+    @Override
     public boolean existByTitle(String title) {
         boolean isTitleExist = false;
         try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM test_database.departments WHERE title = ?")) {
@@ -129,19 +152,7 @@ public class DepartmentJDBCRepository extends AbstractJDBCRepository<Department,
         return isTitleExist;
     }
 
-    public Long getIdByTitle(String title) {
-        Long departmentId = null;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT department_id FROM test_database.departments WHERE title = ?")) {
-            preparedStatement.setString(1, title);
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) departmentId = rs.getLong("department_id");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Optional.ofNullable(departmentId).orElseThrow(()
-                -> new EntityNotFoundException(String.format("%s %s %s", "Department with title '", title, "' has not been found")));
-    }
-
+    @Override
     public void addEmployee(long departmentId, long employeeId) {
         try (PreparedStatement preparedStatement = connection.prepareStatement("UPDATE test_database.employees SET department_id = ? WHERE employee_id = ?")) {
             preparedStatement.setLong(1, departmentId);

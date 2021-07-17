@@ -55,7 +55,7 @@
                         <br/>
 
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
+                        <input type="text" class="form-control" id="title" name="title" value="${title}" required>
                         <span class="error">${errors.DepartmentTitleCannotBeNull}</span>
                         <span class="error">${errors.DepartmentTitleCannotBeEmpty}</span>
                         <span class="error">${errors.DepartmentWithThisTitleIsAlreadyExist}</span>
@@ -65,7 +65,7 @@
                         <br/>
 
                         <label for="description">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" required>
+                        <input type="text" class="form-control" id="description" name="description" value="${description}" required>
                         <span class="error">${errors.DepartmentDescriptionCanContainsTo255Characters}</span>
 
                         <br/>
