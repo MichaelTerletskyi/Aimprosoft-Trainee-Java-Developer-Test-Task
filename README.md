@@ -21,6 +21,7 @@
 
 # <a name="structure"></a>Структура проекта
 
+```yaml
 * Java 12
 * JDBC
 * Maven
@@ -32,6 +33,7 @@
 * org.junit.jupiter 5.8.0-M1
 * org.hibernate.validator 6.0.10.Final
 * javax.validation 2.0.1.Final
+```
 
 <hr>
 
@@ -99,22 +101,31 @@
 ![Header Image](src/main/resources/screens/Department%20Scheme.jpg)
 
 Правила валидации:
+```yaml
 1. Title не может быть null
 2. Title не может быть пустым
 3. Минимальная длинна Title не должна быть короче 1 буквы
 4. Максимальная длинна Title не должна быть больше 64 букв
+```
 
 ![Header Image](src/main/resources/screens/Department%20title%20empty%20or%20length%20error%20message.jpg)
 
+```yaml
 5. Title может состоять только из латиници или кириллицы
+```
 
 ![Header Image](src/main/resources/screens/Department%20title%20regexp%20error%20message.jpg)
 
+```yaml
 6. Title - по умолчанию уникальный, это значит, что вы не сможете создать Департамент, title, которого уже существует в базе данных, то же правило действительно и для редактировния
+```
 
 ![Header Image](src/main/resources/screens/Department%20unique%20check%20error%20message.jpg)
 
+
+```yaml
 7. Description может быть пустым или иметь до 255 любых символов
+```
 
 ![Header Image](src/main/resources/screens/Department%20description%20length%20error%20message.jpg)
 
@@ -132,74 +143,96 @@
 
 
 Правила валидации:
+```yaml
 1. First Name не может быть null
 2. First Name не может быть пустым
 3. Минимальная длинна First Name не должна быть короче 1 буквы
 4. Максимальная длинна First Name не должна быть больше 32 букв
+```
 
 ![Header Image](src/main/resources/screens/Employee%20firstName%20length%20error%20message.jpg)
 
+```yaml
 5. firstName может состоять только из латиници или кириллицы
+```
 
 ![Header Image](src/main/resources/screens/Employee%20firstName%20regexp%20error%20message.jpg)
 
+```yaml
 6. Last Name не может быть null
 7. Last Name не может быть пустым
 8. Минимальная длинна Last Name не должна быть короче 1 буквы
 9. Максимальная длинна Last Name не должна быть больше 32 букв
+```
 
 ![Header Image](src/main/resources/screens/Employee%20lastName%20length%20error%20message.jpg)
 
+```yaml
 10. Last Name может состоять только из латиници или кириллицы
+```
 
 ![Header Image](src/main/resources/screens/Employee%20lastName%20regexp%20error%20message.jpg)
 
+```yaml
 11. Email не может быть null
 12. Email не может быть пустым
-
+```
 ![Header Image](src/main/resources/screens/Employee%20email%20empty%20error%20message.jpg)
 
+```yaml
 13. Email должен быть валидным
+```
 
 ![Header Image](src/main/resources/screens/Employee%20email%20incorrect%20error%20message.jpg)
 
+```yaml
 14. Email - по умолчанию уникальный, это значит, что вы не сможете создать Сотрудника, email, которого уже существует в базе данных, то же правило действительно и для редактировния
+```
 
 ![Header Image](src/main/resources/screens/Employee%20email%20unique%20check%20error%20message.jpg)
 
+```yaml
 15. Salary Per Hour не может null
+```
 
 ![Header Image](src/main/resources/screens/Employee%20salaryPerHour%20cannot%20be%20null.jpg)
 
+```yaml
 16. Salary Per Hour не может быть меньше 1 $
+```
 
 ![Header Image](src/main/resources/screens/Employee%20salaryPerHour%20min%20error%20message.jpg)
 
+```yaml
 17. Salary Per Hour не может превышать число в 99999 $
+```
 
 ![Header Image](src/main/resources/screens/Employee%20salaryPerHour%20max%20error%20message.jpg)
 
+```yaml
 18. Date Of Birth не может null
+```
 
 ![Header Image](src/main/resources/screens/Employee%20dateOfBirth%20null%20error%20mesage.jpg)
 
+```yaml
 19. Date Of Birth не может быть в будущем
+```
 
 ![Header Image](src/main/resources/screens/Employee%20dateOfBirth%20future%20error%20message.jpg)
 <hr>
 
 
 
-
 # <a name="developers_guide"></a>Для девелоперов
 Для успешного запуска проекта вам понадобится установить :
 
+```yaml
 * Java 8+ (Рекомендую скачать JDK по этой ссылке https://openjdk.java.net/)
 * Tomcat (Ссылка https://tomcat.apache.org/download-90.cgi)
 * MySQL (Ссылка https://dev.mysql.com/downloads/installer/)
-
+```
 <hr>
-
 
 
 
