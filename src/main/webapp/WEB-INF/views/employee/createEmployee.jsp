@@ -78,7 +78,7 @@
 
                         <br/>
 
-                        <label for="salaryPerHour">Salary Per Hour</label>
+                        <label for="salaryPerHour">Salary Per Hour ($)</label>
                         <input type="number" class="form-control" id="salaryPerHour" name="salaryPerHour" value="${salaryPerHour}" required>
                         <span class="error">${errors.EmployeeSalaryPerHourCannotBeNull}</span>
                         <span class="error">${errors.EmployeeSalaryPerHourCannotBeLessThen1}</span>

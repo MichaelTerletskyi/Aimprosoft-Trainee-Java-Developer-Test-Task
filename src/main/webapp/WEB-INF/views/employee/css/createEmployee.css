@@ -1,5 +1,5 @@
 body {
-    background: url("https://www.limeade.com/en/wp-content/uploads/2016/09/iStock_000023708461_Large.jpg");
+    background: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_519578900_316016.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -7,8 +7,36 @@ body {
 }
 
 .col-md-3 {
-    background: rebeccapurple;
+    background: #9f5eff;
     padding: 4%;
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
+}
+
+input[type="text"] {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 25px;
+    color: black;
+}
+
+input[type="email"] {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 25px;
+    color: black;
+}
+
+input[type="number"] {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 25px;
+    color: black;
+}
+
+input[type="date"] {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 25px;
+    color: black;
 }

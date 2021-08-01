@@ -12,3 +12,10 @@ body {
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
 }
+
+input[type="text"] {
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-size: 30px;
+    color: black;
+}

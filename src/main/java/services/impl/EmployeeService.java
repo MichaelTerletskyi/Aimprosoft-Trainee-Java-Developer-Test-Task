@@ -47,12 +47,21 @@ public class EmployeeService extends AbstractService<Employee> {
         Department department = departmentService.getById(departmentService.getDepId(req.getQueryString()));
         req.setAttribute("departmentId", department.getId());
         req.setAttribute("departmentTitle", department.getTitle());
-        req.setAttribute("firstName", req.getParameter("firstName"));
-        req.setAttribute("lastName", req.getParameter("lastName"));
-        req.setAttribute("email", req.getParameter("email"));
-        req.setAttribute("salaryPerHour", BigDecimal.valueOf(Long.parseLong(req.getParameter("salaryPerHour"))));
-        req.setAttribute("dateOfBirth", LocalDate.parse(req.getParameter("dateOfBirth")));
+        if (emptyCheck(req.getParameter("firstName")))
+            req.setAttribute("firstName", req.getParameter("firstName"));
+        if (emptyCheck(req.getParameter("lastName")))
+            req.setAttribute("lastName", req.getParameter("lastName"));
+        if (emptyCheck(req.getParameter("email")))
+            req.setAttribute("email", req.getParameter("email"));
+        if (emptyCheck(req.getParameter("salaryPerHour")))
+            req.setAttribute("salaryPerHour", BigDecimal.valueOf(Long.parseLong(req.getParameter("salaryPerHour"))));
+        if (emptyCheck(req.getParameter("dateOfBirth")))
+            req.setAttribute("dateOfBirth", LocalDate.parse(req.getParameter("dateOfBirth")));
         req.setAttribute("head", Boolean.parseBoolean(req.getParameter("head")));
+    }
+
+    private boolean emptyCheck(String string) {
+        return !string.isEmpty();
     }
 
     public void attributesSetsWithId(HttpServletRequest req) {

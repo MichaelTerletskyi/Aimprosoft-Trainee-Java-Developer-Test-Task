@@ -51,11 +51,13 @@ public class EmployeeValidator extends Validator<Employee> {
     @Override
     protected Employee getPrimalModel(HttpServletRequest req) {
         Employee employee = new Employee(req.getParameter("firstName"), req.getParameter("lastName"),
-                req.getParameter("email"), BigDecimal.valueOf(Long.parseLong(req.getParameter("salaryPerHour"))),
+                req.getParameter("email"), null,
                 null, Boolean.parseBoolean(req.getParameter("head")));
 
         if (!Objects.isNull(req.getParameter("employeeId")))
             employee.setId(Long.parseLong(req.getParameter("employeeId")));
+        if (!req.getParameter("salaryPerHour").isEmpty())
+            employee.setSalaryPerHour(BigDecimal.valueOf(Long.parseLong(req.getParameter("salaryPerHour"))));
         if (!req.getParameter("dateOfBirth").isEmpty())
             employee.setDateOfBirth(LocalDate.parse(req.getParameter("dateOfBirth")));
         return employee;
